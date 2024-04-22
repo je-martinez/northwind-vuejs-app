@@ -6,9 +6,20 @@
   <HomeFooter />
 </template>
 
-<script setup lang="ts">
-import HomeHeader from "../components/HomeHeader.vue";
-import HomeFooter from "../components/HomeFooter.vue";
+<script lang="ts">
+import { defineAsyncComponent, defineComponent } from "vue";
+
+export default defineComponent({
+  name: "HomeLayout",
+  components: {
+    HomeHeader: defineAsyncComponent(
+      () => import("../components/HomeHeader.vue")
+    ),
+    HomeFooter: defineAsyncComponent(
+      () => import("../components/HomeFooter.vue")
+    ),
+  },
+});
 </script>
 
 <style></style>

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { EmployeeResponse } from "@/types/northwind";
+import { EmployeeResponse } from "@/api/types";
 
 const northwindApi = axios.create({
   baseURL: "https://northwind.vercel.app/api",

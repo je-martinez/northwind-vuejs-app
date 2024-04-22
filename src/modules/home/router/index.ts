@@ -10,7 +10,7 @@ export default {
       name: "home",
       component: () =>
         import(
-          /* webpackChunkName: "home" */ "@/modules/home/views/EntitiesAvailableView.vue"
+          /* webpackChunkName: "home" */ "@/modules/home/views/EntityListView.vue"
         ),
     },
   ],

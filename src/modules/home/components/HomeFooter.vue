@@ -4,7 +4,7 @@
       <div>
         <h1 class="text-2xl font-bold text-gray-500">saunatime</h1>
         <p>The largest online community to rent saunas in Finland.</p>
-        <spa>© Sharetribe 2017.</spa>
+        <span>© Sharetribe 2017.</span>
       </div>
       <div class="pt-2">
         <ul>
@@ -93,7 +93,14 @@
 </template>
 
 <script>
-export default {};
+import { defineComponent } from "vue";
+
+export default defineComponent({
+  nmae: "HomeFooter",
+  setup() {
+    return {};
+  },
+});
 </script>
 
 <style></style>
