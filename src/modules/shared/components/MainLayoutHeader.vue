@@ -26,7 +26,7 @@
             <input
               class="outline-none text-sm flex-grow"
               type="text"
-              placeholder="Search for categories..."
+              placeholder="Search"
             />
           </div>
         </div>

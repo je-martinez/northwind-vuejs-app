@@ -1,9 +1,9 @@
 import { RouteRecordRaw } from "vue-router";
-import HomeLayout from "../layouts/HomeLayout.vue";
+import MainLayout from "@/modules/shared/layouts/MainLayout.vue";
 
 export default {
   path: "/home",
-  component: HomeLayout,
+  component: MainLayout,
   children: [
     {
       path: "",
