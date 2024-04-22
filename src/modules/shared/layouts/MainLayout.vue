@@ -1,6 +1,6 @@
 <template>
   <MainLayoutHeader />
-  <main class="py-16 container mx-auto px-6 md:px-0">
+  <main class="container mx-auto px-6 md:px-0">
     <router-view />
   </main>
   <MainLayoutFooter />
