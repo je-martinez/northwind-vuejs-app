@@ -7,6 +7,7 @@
         :key="entity.id"
         :title="entity.name"
         :description="entity.description"
+        :image="entity.image"
       />
     </div>
     <hr class="w-40 my-14 border-4 rounded-md sm:mx-0 mx-auto" />

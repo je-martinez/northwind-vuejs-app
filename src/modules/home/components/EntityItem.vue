@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="bg-gray-300 h-44"></div>
+    <div class="bg-gray-300 h-44">
+      <img class="w-full max-h-44" v-if="image" :src="image" />
+    </div>
     <h3 class="text-lg font-semibold text-gray-500 mt-2">
       <span class="text-gray-700">{{ title }}</span>
     </h3>
@@ -18,6 +20,10 @@ export default defineComponent({
       required: true,
     },
     description: {
+      type: String,
+      required: false,
+    },
+    image: {
       type: String,
       required: false,
     },
