@@ -6,6 +6,7 @@
       <EntityItem
         v-for="entity in entityList"
         :key="entity.id"
+        :id="entity.id"
         :title="entity.name"
         :description="entity.description"
         :image="entity.image"

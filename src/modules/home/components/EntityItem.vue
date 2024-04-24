@@ -1,5 +1,5 @@
 <template>
-  <div class="cursor-pointer">
+  <div @click="navigateTo" class="cursor-pointer">
     <div class="bg-gray-300 h-44">
       <img
         class="w-full max-h-44 transition-all duration-500 ease-in-out hover:opacity-30"
@@ -15,10 +15,15 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "EntityItem",
   props: {
+    id: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,
@@ -32,8 +37,14 @@ export default defineComponent({
       required: false,
     },
   },
-  setup() {
-    return {};
+  setup(props) {
+    const router = useRouter();
+
+    const navigateTo = () => {
+      router.push({ name: props.id });
+    };
+
+    return { navigateTo };
   },
 });
 </script>

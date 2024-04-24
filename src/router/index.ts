@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import homeRouter from "@/modules/home/router";
+import entitiesRouter from "@/modules/entities/router";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -9,6 +10,7 @@ const routes: Array<RouteRecordRaw> = [
   {
     ...homeRouter,
   },
+  { ...entitiesRouter },
 ];
 
 const router = createRouter({
