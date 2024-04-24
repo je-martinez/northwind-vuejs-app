@@ -1,4 +1,4 @@
-export interface CustomersResponse {
+export interface Customer {
   id: string;
   companyName: string;
   contactName: string;
@@ -14,3 +14,5 @@ export interface CustomerAddress {
   country: string;
   phone: string;
 }
+
+export type CustomersResponse = Array<Customer>;

@@ -1,7 +1,7 @@
 <template>
   <section>
     <AppDescription />
-    <h1 class="text-3xl font-bold text-gray-600 mb-10">Explore our database</h1>
+    <h1 class="text-3xl font-bold text-gray-600 my-10">Explore our database</h1>
     <div class="grid sm:grid-cols-3 gap-4 grid-cols-2">
       <EntityItem
         v-for="entity in entityList"

@@ -1,4 +1,4 @@
-export interface EmployeeResponse {
+export interface Employee {
   id: number;
   lastName: string;
   firstName: string;
@@ -20,3 +20,5 @@ export interface EmployeeAddress {
   country: string;
   phone: string;
 }
+
+export type EmployeesResponse = Array<Employee>;
