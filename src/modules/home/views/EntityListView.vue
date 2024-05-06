@@ -20,7 +20,6 @@
 import type { EntityItem } from "../types";
 import { computed, defineAsyncComponent, defineComponent } from "vue";
 import { EntityList } from "../constants";
-import { useNorthwind } from "@/modules/entities/composables";
 
 export default defineComponent({
   name: "EntitiesAvailableView",
@@ -34,10 +33,6 @@ export default defineComponent({
     ),
   },
   setup() {
-    const { fetchCategories } = useNorthwind();
-
-    fetchCategories();
-
     return { entityList: computed<EntityItem[]>(() => EntityList) };
   },
 });
