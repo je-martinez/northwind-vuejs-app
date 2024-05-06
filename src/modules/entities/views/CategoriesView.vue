@@ -6,15 +6,10 @@
 
 <script>
 import { defineComponent } from "vue";
-import { useNorthwind } from "../composables/useNorthwind";
 
 export default defineComponent({
   name: "CategoriesView",
   setup() {
-    const { fetchCategories } = useNorthwind();
-
-    fetchCategories();
-
     return {};
   },
 });
