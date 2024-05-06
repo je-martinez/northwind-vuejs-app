@@ -1,18 +1,24 @@
 <template>
-  <div>
-    <h1>Categories</h1>
-  </div>
+  <section>
+    <h1 class="text-3xl font-bold text-gray-600 my-10">
+      Explore our categories
+    </h1>
+    <category-list />
+  </section>
 </template>
 
 <script>
-import { defineComponent } from "vue";
+import { defineAsyncComponent, defineComponent } from "vue";
 
 export default defineComponent({
   name: "CategoriesView",
+  components: {
+    CategoryList: defineAsyncComponent(() =>
+      import("@/modules/entities/components/CategoryList.vue")
+    ),
+  },
   setup() {
     return {};
   },
 });
 </script>
-
-<style></style>
