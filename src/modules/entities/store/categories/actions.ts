@@ -1,7 +1,7 @@
 import { ActionTree } from "vuex";
 import { CategoriesState as CategoriesState } from "./state";
-import { StateInterface } from "../index";
 import { getCategories } from "@/api";
+import { StateInterface } from "@/store";
 
 const actions: ActionTree<CategoriesState, StateInterface> = {
   async fetchCategories({ commit }) {

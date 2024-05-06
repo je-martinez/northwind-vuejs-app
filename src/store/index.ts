@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
-import { CategoriesState } from "./categories/state";
-import categories from "./categories";
+import type { CategoriesState } from "@/modules/entities/store/categories/state";
+import categories from "@/modules/entities/store/categories";
 
 export interface StateInterface {
   categories: CategoriesState;

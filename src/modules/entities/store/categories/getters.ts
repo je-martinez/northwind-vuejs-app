@@ -1,6 +1,6 @@
 import { GetterTree } from "vuex";
 import { CategoriesState } from "./state";
-import { StateInterface } from "../index";
+import { StateInterface } from "@/store";
 
 const getters: GetterTree<CategoriesState, StateInterface> = {
   allCategories(state: CategoriesState) {
