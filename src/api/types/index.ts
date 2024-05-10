@@ -7,3 +7,4 @@ export * from "./products.types";
 export * from "./regions.types";
 export * from "./shippers.types";
 export * from "./suppliers.types";
+export * from "./unsplash.types";

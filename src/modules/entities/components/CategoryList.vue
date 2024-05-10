@@ -2,9 +2,13 @@
   <section>
     <div
       :v-if="allCategories?.length > 0"
-      class="w-full grid grid-cols-3 gap-4"
+      class="w-full grid gap-4 pb-8 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
     >
-      <category-item v-for="category in allCategories" :key="category.id" />
+      <category-item
+        v-for="category in allCategories"
+        :key="category.id"
+        :category="category"
+      />
     </div>
   </section>
 </template>
