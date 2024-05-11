@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import { defineAsyncComponent, defineComponent } from "vue";
-import { useNorthwind } from "../composables";
+import { useNorthwindStore } from "../composables";
 export default defineComponent({
   name: "CategoryList",
   components: {
@@ -24,7 +24,7 @@ export default defineComponent({
     ),
   },
   setup() {
-    const { allCategories } = useNorthwind();
+    const { allCategories } = useNorthwindStore();
 
     return { allCategories };
   },

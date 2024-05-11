@@ -1,1 +1,1 @@
-export { useNorthwind } from "./useNorthwind";
+export { useNorthwindStore } from "./useNorthwindStore";

@@ -2,7 +2,7 @@ import { useStore } from "vuex";
 import { computed } from "vue";
 import { Category } from "@/api/types";
 
-export function useNorthwind() {
+export function useNorthwindStore() {
   const store = useStore();
 
   return {
