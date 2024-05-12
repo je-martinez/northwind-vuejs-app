@@ -3,15 +3,9 @@ import { CategoriesState } from "./state";
 import { StateInterface } from "@/store";
 
 const getters: GetterTree<CategoriesState, StateInterface> = {
-  allCategories(state: CategoriesState) {
-    return state.categories;
-  },
-  loading(state: CategoriesState) {
-    return state.loading;
-  },
-  error(state: CategoriesState) {
-    return state.error;
-  },
+  allCategories: (state: CategoriesState) => state.categories,
+  loading: (state: CategoriesState) => state.loading,
+  error: (state: CategoriesState) => state.error,
 };
 
 export default getters;

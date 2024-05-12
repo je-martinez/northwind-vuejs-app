@@ -13,5 +13,13 @@ export default {
           /* webpackChunkName: "categories" */ "@/modules/entities/views/CategoriesView.vue"
         ),
     },
+    {
+      path: "regions",
+      name: "regions",
+      component: () =>
+        import(
+          /* webpackChunkName: "regions" */ "@/modules/entities/views/RegionsView.vue"
+        ),
+    },
   ],
 } as RouteRecordRaw;

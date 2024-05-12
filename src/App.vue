@@ -8,8 +8,9 @@ import { useNorthwindStore } from "./modules/entities/composables";
 export default defineComponent({
   name: "App",
   setup() {
-    const { fetchCategories } = useNorthwindStore();
+    const { fetchCategories, fetchRegions } = useNorthwindStore();
     fetchCategories();
+    fetchRegions();
     return {};
   },
 });

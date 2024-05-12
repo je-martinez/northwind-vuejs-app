@@ -12,10 +12,7 @@ const mutation: MutationTree<CategoriesState> = {
   ) {
     state.categories = state.categories.map((category) => {
       if (category.id === id) {
-        return {
-          ...category,
-          photos: { ...photos },
-        };
+        category.photos = { ...photos };
       }
       return category;
     });

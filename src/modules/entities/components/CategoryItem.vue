@@ -4,7 +4,7 @@
       <img
         :v-if="category?.photos?.regular"
         :src="category?.photos?.regular"
-        alt="category.name"
+        :alt="category.name"
         class="w-20 h-20 object-cover rounded-lg"
       />
     </div>
