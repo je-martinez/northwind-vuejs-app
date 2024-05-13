@@ -1,6 +1,6 @@
 import { useStore } from "vuex";
 import { computed } from "vue";
-import { Category } from "@/api/types";
+import { Category, Region } from "@/api/types";
 
 export function useNorthwindStore() {
   const store = useStore();
@@ -25,8 +25,8 @@ export function useNorthwindStore() {
     /**============================================
      *               Regions
      *=============================================**/
-    allRegions: computed<Category[]>(() => store.getters["regions/allRegions"]),
-    selectedRegion: computed<Category | null | undefined>(
+    allRegions: computed<Region[]>(() => store.getters["regions/allRegions"]),
+    selectedRegion: computed<Region | null | undefined>(
       () => store.getters["regions/selectedRegion"]
     ),
     loadingRegions: computed<boolean>(() => store.getters["regions/loading"]),

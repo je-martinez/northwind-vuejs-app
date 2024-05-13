@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
-import MainLayout from "@/modules/shared/layouts/MainLayout.vue";
+import MainLayout from "@/modules/ui/layouts/MainLayout.vue";
 
 export default {
   path: "/entities",

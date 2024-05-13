@@ -7,14 +7,14 @@
   </section>
 </template>
 
-<script>
+<script lang="ts">
 import { defineAsyncComponent, defineComponent } from "vue";
 
 export default defineComponent({
   name: "CategoriesView",
   components: {
-    CategoryList: defineAsyncComponent(() =>
-      import("@/modules/entities/components/CategoryList.vue")
+    CategoryList: defineAsyncComponent(
+      () => import("@/modules/entities/components/CategoryList.vue")
     ),
   },
   setup() {

@@ -15,7 +15,7 @@
         <li
           class="text-xs"
           v-for="territory in region.territories"
-          :key="territory.id"
+          :key="territory.territoryId"
         >
           {{ territory.name }}
         </li>
@@ -38,5 +38,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style></style>
