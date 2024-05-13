@@ -1,7 +1,12 @@
 <template>
   <div class="shadow w-full flex rounded-xl p-3">
     <div class="w-2/3">
-      <img :alt="region.name" class="w-20 h-20 object-cover rounded-lg" />
+      <img
+        v-if="region?.photos?.regular"
+        :src="region.photos.regular"
+        :alt="region.name"
+        class="w-20 h-20 object-cover rounded-lg"
+      />
     </div>
     <div class="w-2/3">
       <h4 class="font-bold mb-3 text-md">{{ region.name }}</h4>

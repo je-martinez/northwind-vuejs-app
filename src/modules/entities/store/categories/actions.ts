@@ -28,6 +28,9 @@ const actions: ActionTree<CategoriesState, StateInterface> = {
         return;
       }
       const { results } = response;
+      if (!results.length) {
+        return;
+      }
       const { urls: photos } = results[0];
       commit("setCategoryPhotos", {
         id: category.id,

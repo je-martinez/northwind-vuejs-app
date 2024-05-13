@@ -10,9 +10,9 @@ const actions: ActionTree<RegionState, StateInterface> = {
     try {
       const response = await getRegions();
       commit("setRegions", response?.data);
-      // response?.data.forEach((region: Region) => {
-      //   dispatch("fetchRegionPhotos", region);
-      // });
+      response?.data.forEach((region: Region) => {
+        dispatch("fetchRegionPhotos", region);
+      });
     } catch (error) {
       commit("setError", "Error while fetching regions");
     } finally {
@@ -26,6 +26,9 @@ const actions: ActionTree<RegionState, StateInterface> = {
         return;
       }
       const { results } = response;
+      if (!results.length) {
+        return;
+      }
       const { urls: photos } = results[0];
       commit("setRegionPhotos", {
         id: region.id,
