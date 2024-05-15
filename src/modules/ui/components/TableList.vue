@@ -2,7 +2,11 @@
   <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
     <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
       <table class="min-w-full leading-normal">
-        <table-list-header :headers="headers" />
+        <table-list-header :headers="headers">
+          <template v-for="header in headers" v-slot:[`header_${header.id}`]>
+            <slot :name="`header_${header.id}`"></slot>
+          </template>
+        </table-list-header>
         <table-list-data :headers="headers" :data="data" />
       </table>
       <!-- <table-list-navigation-buttons /> -->

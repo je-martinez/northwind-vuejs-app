@@ -1,5 +1,5 @@
 <template>
-  <table-list :headers="headers" :data="data" />
+  <table-list :headers="headers" :data="allRegions" />
   <div
     class="w-full grid gap-4 pb-8 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4"
   >
@@ -29,36 +29,16 @@ export default defineComponent({
     const { allRegions } = useNorthwindStore();
     const headers: TableHeaderDefinition[] = [
       {
+        id: "id",
+        label: "ID",
+      },
+      {
         id: "name",
         label: "Name",
       },
-      {
-        id: "products",
-        label: "Products",
-      },
-      {
-        id: "created_at",
-        label: "Created At",
-      },
-      {
-        id: "qrt",
-        label: "QRT",
-      },
-      {
-        id: "status",
-        label: "Status",
-      },
     ];
-    const data = [
-      {
-        name: "Alonzo Cox",
-        products: "Admin",
-        created_at: "Jan 18, 2020",
-        qrt: "70",
-        status: "Inactive",
-      },
-    ];
-    return { allRegions, headers, data };
+
+    return { allRegions, headers };
   },
 });
 </script>
