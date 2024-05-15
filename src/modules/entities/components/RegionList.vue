@@ -1,5 +1,5 @@
 <template>
-  <table-list :headers="headers" />
+  <table-list :headers="headers" :data="data" />
   <div
     class="w-full grid gap-4 pb-8 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4"
   >
@@ -49,7 +49,16 @@ export default defineComponent({
         label: "Status",
       },
     ];
-    return { allRegions, headers };
+    const data = [
+      {
+        name: "Alonzo Cox",
+        products: "Admin",
+        created_at: "Jan 18, 2020",
+        qrt: "70",
+        status: "Inactive",
+      },
+    ];
+    return { allRegions, headers, data };
   },
 });
 </script>

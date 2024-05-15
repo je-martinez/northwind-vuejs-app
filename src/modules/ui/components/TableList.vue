@@ -3,16 +3,16 @@
     <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
       <table class="min-w-full leading-normal">
         <table-list-header :headers="headers" />
-        <table-list-data />
+        <table-list-data :headers="headers" :data="data" />
       </table>
-      <table-list-navigation-buttons />
+      <!-- <table-list-navigation-buttons /> -->
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineAsyncComponent, defineComponent, PropType } from "vue";
-import { TableHeaderDefinition } from "../types";
+import { TableHeaderDefinition, TableDataDefinition } from "../types";
 
 export default defineComponent({
   name: "TableList",
@@ -22,6 +22,10 @@ export default defineComponent({
       type: Array as PropType<TableHeaderDefinition[]>,
       required: true,
     },
+    data: {
+      type: Array as PropType<TableDataDefinition[]>,
+      required: false,
+    },
   },
   components: {
     TableListHeader: defineAsyncComponent(
@@ -30,9 +34,9 @@ export default defineComponent({
     TableListData: defineAsyncComponent(
       () => import("@/modules/ui/components/TableListData.vue")
     ),
-    TableListNavigationButtons: defineAsyncComponent(
-      () => import("@/modules/ui/components/TableListNavigationButtons.vue")
-    ),
+    // TableListNavigationButtons: defineAsyncComponent(
+    //   () => import("@/modules/ui/components/TableListNavigationButtons.vue")
+    // ),
   },
   setup() {
     return {};
