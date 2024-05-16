@@ -1,13 +1,13 @@
 <template>
   <tr>
     <td
-      v-for="row_header in headers"
-      :key="row_header.toString()"
+      v-for="header in headers"
+      :key="header?.toString()"
       class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
     >
-      <slot :name="`cell-${row_header.id}`" :data="data[row_header.id]">
+      <slot :name="`${cellPrefix}${header.id}`" :data="data?.[header.id]">
         <p class="text-gray-900 whitespace-no-wrap">
-          {{ data[row_header.id] }}
+          {{ data?.[header.id] }}
         </p>
       </slot>
     </td>
@@ -17,6 +17,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
 import { TableDataDefinition, TableHeaderDefinition } from "../types";
+import { TableListConstants } from "../constants";
 
 export default defineComponent({
   name: "TableListDataRow",
@@ -29,6 +30,10 @@ export default defineComponent({
       type: Object as PropType<TableDataDefinition>,
       required: false,
     },
+  },
+  setup() {
+    const cellPrefix = TableListConstants.CellPrefix;
+    return { cellPrefix };
   },
 });
 </script>

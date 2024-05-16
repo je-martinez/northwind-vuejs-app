@@ -3,11 +3,21 @@
     <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
       <table class="min-w-full leading-normal">
         <table-list-header :headers="headers">
-          <template v-for="header in headers" v-slot:[`header_${header.id}`]>
-            <slot :name="`header_${header.id}`"></slot>
+          <template
+            v-for="header in headers"
+            v-slot:[`${headerPrefix}${header.id}`]
+          >
+            <slot :name="`${headerPrefix}${header.id}`"></slot>
           </template>
         </table-list-header>
-        <table-list-data :headers="headers" :data="data" />
+        <table-list-data :headers="headers" :data="data">
+          <template v-for="() in data">
+            <slot
+              v-for="header in headers"
+              :name="`${cellPrefix}${header.id}`"
+            />
+          </template>
+        </table-list-data>
       </table>
       <!-- <table-list-navigation-buttons /> -->
     </div>
@@ -17,6 +27,7 @@
 <script lang="ts">
 import { defineAsyncComponent, defineComponent, PropType } from "vue";
 import { TableHeaderDefinition, TableDataDefinition } from "../types";
+import { TableListConstants } from "../constants";
 
 export default defineComponent({
   name: "TableList",
@@ -43,7 +54,9 @@ export default defineComponent({
     // ),
   },
   setup() {
-    return {};
+    const headerPrefix = TableListConstants.HeaderPrefix;
+    const cellPrefix = TableListConstants.HeaderPrefix;
+    return { headerPrefix, cellPrefix };
   },
 });
 </script>
