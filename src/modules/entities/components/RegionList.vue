@@ -1,5 +1,6 @@
 <template>
   <grid-or-list-toggle
+    class="mb-4"
     :currentView="currentView"
     @update:currentView="($event) => (currentView = $event)"
   />
@@ -7,7 +8,15 @@
     v-if="currentView === availableViews.list"
     :headers="headers"
     :data="allRegions"
-  />
+  >
+    <template
+      v-for="(region, index) in allRegions"
+      :key="`tblc-territories-${index}`"
+      v-slot:[`tblc-territories-${index}`]
+    >
+      <region-territories :territories="region.territories" />
+    </template>
+  </table-list>
   <div
     v-else
     class="w-full grid gap-4 pb-8 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4"
@@ -31,6 +40,9 @@ export default defineComponent({
     RegionItem: defineAsyncComponent(
       () => import("@/modules/entities/components/RegionItem.vue")
     ),
+    RegionTerritories: defineAsyncComponent(
+      () => import("@/modules/entities/components/RegionTerritories.vue")
+    ),
     TableList: defineAsyncComponent(
       () => import("@/modules/ui/components/TableList.vue")
     ),
@@ -42,10 +54,6 @@ export default defineComponent({
     const { allRegions } = useNorthwindStore();
     const currentView = ref(GridOrListConstants.Grid);
     const headers: TableHeaderDefinition[] = [
-      {
-        id: "id",
-        label: "ID",
-      },
       {
         id: "name",
         label: "Name",
