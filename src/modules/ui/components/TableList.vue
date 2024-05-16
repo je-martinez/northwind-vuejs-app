@@ -2,14 +2,19 @@
   <div class="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
     <div class="inline-block min-w-full shadow rounded-lg overflow-hidden">
       <table class="min-w-full leading-normal">
-        <table-list-header :headers="headers">
-          <template
-            v-for="header in headers"
-            v-slot:[`${headerPrefix}${header.id}`]
-          >
-            <slot :name="`${headerPrefix}${header.id}`" :data="header"></slot>
-          </template>
-        </table-list-header>
+        <thead>
+          <tr>
+            <th
+              v-for="header in headers"
+              :key="header.id"
+              class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+            >
+              <slot :name="`${headerPrefix}${header.id}`">
+                {{ header.label }}
+              </slot>
+            </th>
+          </tr>
+        </thead>
         <tbody>
           <table-list-data-row
             v-for="(row, rowIndex) in data"
@@ -55,9 +60,6 @@ export default defineComponent({
     },
   },
   components: {
-    TableListHeader: defineAsyncComponent(
-      () => import("@/modules/ui/components/TableListHeader.vue")
-    ),
     TableListDataRow: defineAsyncComponent(
       () => import("@/modules/ui/components/TableListDataRow.vue")
     ),
