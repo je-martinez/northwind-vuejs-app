@@ -1,4 +1,4 @@
 export enum TableListConstants {
-  HeaderPrefix = "tlh-",
-  CellPrefix = "tlc-",
+  HeaderPrefix = "tblh-",
+  CellPrefix = "tblc-",
 }

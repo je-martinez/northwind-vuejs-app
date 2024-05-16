@@ -7,16 +7,21 @@
             v-for="header in headers"
             v-slot:[`${headerPrefix}${header.id}`]
           >
-            <slot :name="`${headerPrefix}${header.id}`"></slot>
+            <slot :name="`${headerPrefix}${header.id}`" :data="header"></slot>
           </template>
         </table-list-header>
         <table-list-data :headers="headers" :data="data">
-          <template v-for="() in data">
-            <slot
-              v-for="header in headers"
-              :name="`${cellPrefix}${header.id}`"
-            />
-          </template>
+          <div></div>
+          <!-- <template v-for="header in headerPrefix" :key="header.toString()">
+            <div>
+              <template
+                v-for="(row, rowIndex) in data"
+                v-slot:[`${cellPrefix}${header.id}-${rowIndex}`]
+              >
+                <slot />
+              </template>
+            </div>
+          </template> -->
         </table-list-data>
       </table>
       <!-- <table-list-navigation-buttons /> -->
@@ -55,7 +60,7 @@ export default defineComponent({
   },
   setup() {
     const headerPrefix = TableListConstants.HeaderPrefix;
-    const cellPrefix = TableListConstants.HeaderPrefix;
+    const cellPrefix = TableListConstants.CellPrefix;
     return { headerPrefix, cellPrefix };
   },
 });

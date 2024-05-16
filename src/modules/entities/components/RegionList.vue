@@ -1,5 +1,7 @@
 <template>
-  <table-list :headers="headers" :data="allRegions" />
+  <table-list :headers="headers" :data="allRegions">
+    <template v-slot:tblc-territories-0>Hola</template>
+  </table-list>
   <div
     class="w-full grid gap-4 pb-8 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4"
   >
@@ -36,8 +38,11 @@ export default defineComponent({
         id: "name",
         label: "Name",
       },
+      {
+        id: "territories",
+        label: "Territories",
+      },
     ];
-
     return { allRegions, headers };
   },
 });
