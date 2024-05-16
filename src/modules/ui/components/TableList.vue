@@ -10,19 +10,26 @@
             <slot :name="`${headerPrefix}${header.id}`" :data="header"></slot>
           </template>
         </table-list-header>
-        <table-list-data :headers="headers" :data="data">
-          <div></div>
-          <!-- <template v-for="header in headerPrefix" :key="header.toString()">
-            <div>
-              <template
-                v-for="(row, rowIndex) in data"
-                v-slot:[`${cellPrefix}${header.id}-${rowIndex}`]
-              >
-                <slot />
-              </template>
-            </div>
-          </template> -->
-        </table-list-data>
+        <tbody>
+          <table-list-data-row
+            v-for="(row, rowIndex) in data"
+            :rowIndex="rowIndex"
+            :data="row"
+            :headers="headers"
+            :key="row.toString()"
+          >
+            <template
+              v-for="header in headers"
+              :key="header.toString()"
+              v-slot:[`${cellPrefix}${header.id}-${rowIndex}`]
+            >
+              <slot
+                :name="`${cellPrefix}${header.id}-${rowIndex}`"
+                :data="row?.[header.id]"
+              />
+            </template>
+          </table-list-data-row>
+        </tbody>
       </table>
       <!-- <table-list-navigation-buttons /> -->
     </div>
@@ -51,8 +58,8 @@ export default defineComponent({
     TableListHeader: defineAsyncComponent(
       () => import("@/modules/ui/components/TableListHeader.vue")
     ),
-    TableListData: defineAsyncComponent(
-      () => import("@/modules/ui/components/TableListData.vue")
+    TableListDataRow: defineAsyncComponent(
+      () => import("@/modules/ui/components/TableListDataRow.vue")
     ),
     // TableListNavigationButtons: defineAsyncComponent(
     //   () => import("@/modules/ui/components/TableListNavigationButtons.vue")
