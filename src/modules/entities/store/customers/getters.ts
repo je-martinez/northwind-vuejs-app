@@ -3,7 +3,14 @@ import { CustomersState } from "./state";
 import { StateInterface } from "@/store";
 
 const getters: GetterTree<CustomersState, StateInterface> = {
-  allCustomers: (state: CustomersState) => state.customers,
+  allCustomers: (state: CustomersState, _getters, _rootState, rootGetters) => {
+    return state.customers?.map((customer) => {
+      return {
+        ...customer,
+        orders: rootGetters["orders/getOrdersByCustomerId"](customer.id),
+      };
+    });
+  },
   loading: (state: CustomersState) => state.loading,
   error: (state: CustomersState) => state.error,
 };

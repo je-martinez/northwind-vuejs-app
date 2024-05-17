@@ -1,5 +1,5 @@
 <template>
-  <div class="shadow w-full flex rounded-xl p-3">
+  <div class="bg-white shadow w-full flex rounded-xl p-3">
     <div class="w-2/3">
       <img
         :v-if="category?.photos?.regular"

@@ -1,6 +1,6 @@
 <template>
   <header>
-    <nav class="p-6">
+    <nav class="bg-white p-6">
       <div class="flex justify-between items-center">
         <router-link :to="{ name: 'home' }">
           <h1 class="pr-6 border-r-2 text-2xl font-bold text-gray-500">
@@ -26,7 +26,7 @@
               </svg>
             </span>
             <input
-              class="bg-gray-100 outline-none text-sm flex-grow"
+              class="bg-white outline-none text-sm flex-grow"
               type="text"
               placeholder="Search"
             />
