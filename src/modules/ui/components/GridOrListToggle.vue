@@ -3,21 +3,31 @@
     class="bg-gray-200 text-sm text-gray-500 leading-none border-2 border-gray-200 rounded-full inline-flex"
   >
     <button
-      :class="{ active: currentView == availableViews.grid }"
-      class="inline-flex items-center focus:outline-none hover:text-blue-400 focus:text-blue-400 rounded-l-full px-4 py-2"
+      :class="{ 'bg-white rounded-full': currentView === availableViews.grid }"
+      class="inline-flex items-center focus:outline-none rounded-l-full px-4 py-2"
       id="grid"
       @click="toggleView(availableViews.grid)"
     >
-      <Squares2X2Icon class="size-4 text-blue-500" />
+      <Squares2X2Icon
+        :class="{
+          'bg-white text-gray-500': currentView === availableViews.grid,
+        }"
+        class="size-4 text-gray-400"
+      />
       <span class="pl-2">Grid</span>
     </button>
     <button
-      :class="{ active: currentView === availableViews.list }"
-      class="inline-flex items-center focus:outline-none hover:text-blue-400 focus:text-blue-400 rounded-r-full px-4 py-2"
+      :class="{ 'bg-white rounded-full': currentView === availableViews.list }"
+      class="inline-flex items-center focus:outline-none rounded-r-full px-4 py-2"
       id="list"
       @click="toggleView(availableViews.list)"
     >
-      <ListBulletIcon class="size-4 text-blue-500" />
+      <ListBulletIcon
+        :class="{
+          'bg-white text-gray-500': currentView === availableViews.list,
+        }"
+        class="size-4 text-gray-400"
+      />
       <span class="pl-2">List</span>
     </button>
   </div>
@@ -52,12 +62,3 @@ export default defineComponent({
   },
 });
 </script>
-
-<style scoped>
-/*@apply bg-white text-blue-400 rounded-full;*/
-.active {
-  background: white;
-  border-radius: 9999px;
-  color: #63b3ed;
-}
-</style>
