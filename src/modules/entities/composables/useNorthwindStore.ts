@@ -34,5 +34,18 @@ export function useNorthwindStore() {
       () => store.getters["regions/error"]
     ),
     fetchRegions: () => store.dispatch("regions/fetchRegions"),
+    /**============================================
+     *               Suppliers
+     *=============================================**/
+    allSuppliers: computed<Category[]>(
+      () => store.getters["suppliers/allSuppliers"]
+    ),
+    loadingSuppliers: computed<boolean>(
+      () => store.getters["suppliers/loading"]
+    ),
+    errorSuppliers: computed<string | null | undefined>(
+      () => store.getters["suppliers/error"]
+    ),
+    fetchSuppliers: () => store.dispatch("suppliers/fetchSuppliers"),
   };
 }
