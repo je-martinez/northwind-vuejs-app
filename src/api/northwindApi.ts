@@ -22,7 +22,7 @@ const getCustomers = async () => {
 };
 
 const getEmployees = async () => {
-  return northwindApi.get<EmployeesResponse>("/employees");
+  return northwindApi.get<EmployeesResponse>("/employess");
 };
 
 const getOrders = async () => {

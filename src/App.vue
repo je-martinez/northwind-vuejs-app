@@ -14,12 +14,14 @@ export default defineComponent({
       fetchSuppliers,
       fetchShippers,
       fetchCustomers,
+      fetchEmployees,
     } = useNorthwindStore();
     fetchCategories();
     fetchRegions();
     fetchSuppliers();
     fetchShippers();
     fetchCustomers();
+    fetchEmployees();
     return {};
   },
 });

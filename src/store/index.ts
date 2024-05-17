@@ -9,6 +9,8 @@ import type { ShippersState } from "@/modules/entities/store/shippers/state";
 import customers from "@/modules/entities/store/customers";
 import type { CustomersState } from "@/modules/entities/store/customers/state";
 import { createStore } from "vuex";
+import type { EmployeesState } from "@/modules/entities/store/employees/state";
+import employees from "@/modules/entities/store/employees";
 
 export interface StateInterface {
   categories: CategoriesState;
@@ -16,6 +18,7 @@ export interface StateInterface {
   suppliers: SuppliersState;
   shippers: ShippersState;
   customers: CustomersState;
+  employees: EmployeesState;
 }
 
 export default createStore<StateInterface>({
@@ -25,5 +28,6 @@ export default createStore<StateInterface>({
     suppliers,
     shippers,
     customers,
+    employees,
   },
 });
