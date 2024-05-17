@@ -14,7 +14,7 @@ export const EntityList: EntityItem[] = [
     image: require("@/assets/images/customers.png"),
   },
   {
-    id: "employess",
+    id: "employees",
     name: "Employees",
     description: undefined,
     image: require("@/assets/images/employees.png"),
