@@ -1,5 +1,5 @@
 import { Module } from "vuex";
-import { StateInterface } from "../index";
+import { StateInterface } from "@/store";
 
 import state, { ModuleState } from "./state";
 import actions from "./actions";
