@@ -26,7 +26,7 @@
               </svg>
             </span>
             <input
-              class="outline-none text-sm flex-grow"
+              class="bg-gray-100 outline-none text-sm flex-grow"
               type="text"
               placeholder="Search"
             />
