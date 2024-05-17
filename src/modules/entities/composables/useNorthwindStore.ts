@@ -1,6 +1,6 @@
 import { useStore } from "vuex";
 import { computed } from "vue";
-import { Category, Region } from "@/api/types";
+import { Category, Region, Shipper, Supplier } from "@/api/types";
 
 export function useNorthwindStore() {
   const store = useStore();
@@ -11,9 +11,6 @@ export function useNorthwindStore() {
      *=============================================**/
     allCategories: computed<Category[]>(
       () => store.getters["categories/allCategories"]
-    ),
-    selectedCategory: computed<Category | null | undefined>(
-      () => store.getters["categories/selectedCategory"]
     ),
     loadingCategories: computed<boolean>(
       () => store.getters["categories/loading"]
@@ -26,9 +23,6 @@ export function useNorthwindStore() {
      *               Regions
      *=============================================**/
     allRegions: computed<Region[]>(() => store.getters["regions/allRegions"]),
-    selectedRegion: computed<Region | null | undefined>(
-      () => store.getters["regions/selectedRegion"]
-    ),
     loadingRegions: computed<boolean>(() => store.getters["regions/loading"]),
     errorRegions: computed<string | null | undefined>(
       () => store.getters["regions/error"]
@@ -37,7 +31,7 @@ export function useNorthwindStore() {
     /**============================================
      *               Suppliers
      *=============================================**/
-    allSuppliers: computed<Category[]>(
+    allSuppliers: computed<Supplier[]>(
       () => store.getters["suppliers/allSuppliers"]
     ),
     loadingSuppliers: computed<boolean>(
@@ -47,5 +41,16 @@ export function useNorthwindStore() {
       () => store.getters["suppliers/error"]
     ),
     fetchSuppliers: () => store.dispatch("suppliers/fetchSuppliers"),
+    /**============================================
+     *               Shippers
+     *=============================================**/
+    allShippers: computed<Shipper[]>(
+      () => store.getters["shippers/allShippers"]
+    ),
+    loadingShippers: computed<boolean>(() => store.getters["shippers/loading"]),
+    errorShippers: computed<string | null | undefined>(
+      () => store.getters["shippers/error"]
+    ),
+    fetchShippers: () => store.dispatch("shippers/fetchShippers"),
   };
 }
