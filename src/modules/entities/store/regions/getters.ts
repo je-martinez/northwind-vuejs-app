@@ -4,6 +4,12 @@ import { StateInterface } from "@/store";
 
 const getters: GetterTree<RegionState, StateInterface> = {
   allRegions: (state) => state.regions,
+  getTerrritoriesByIDs: (state) => (territoryIds: number[]) => {
+    return state.regions
+      ?.map((region) => region.territories)
+      .flat()
+      .filter((territory) => territoryIds.includes(territory.territoryId));
+  },
   loading: (state) => state.loading,
   error: (state) => state.error,
 };

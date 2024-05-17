@@ -7,6 +7,9 @@ const getters: GetterTree<OrdersState, StateInterface> = {
   getOrdersByCustomerId: (state: OrdersState) => (customerId: string) => {
     return state.orders?.filter((order) => order?.customerId === customerId);
   },
+  getOrdersByEmployeeId: (state: OrdersState) => (employeeId: number) => {
+    return state.orders?.filter((order) => order?.employeeId === employeeId);
+  },
   loading: (state: OrdersState) => state.loading,
   error: (state: OrdersState) => state.error,
 };
