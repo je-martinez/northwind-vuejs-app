@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1 class="text-3xl font-bold text-gray-600 mt-10">Explore our database</h1>
+    <section-title title="Explore our database" />
     <div
       class="grid xs:grid-cols-1 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-4 gap-4"
     >
@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts">
-import type { EntityItem } from "../types";
 import { computed, defineAsyncComponent, defineComponent } from "vue";
+import type { EntityItem } from "../types";
 import { EntityList } from "../constants";
 
 export default defineComponent({
@@ -28,6 +28,9 @@ export default defineComponent({
   components: {
     EntityItem: defineAsyncComponent(
       () => import("../components/EntityItem.vue")
+    ),
+    SectionTitle: defineAsyncComponent(
+      () => import("@/modules/ui/components/SectionTitle.vue")
     ),
   },
   setup() {

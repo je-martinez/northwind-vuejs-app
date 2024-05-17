@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h1 class="text-3xl font-bold text-gray-600 my-10">Explore our Regions</h1>
+    <section-title title="Explore our Regions" />
     <region-list />
   </section>
 </template>
@@ -13,6 +13,9 @@ export default defineComponent({
   components: {
     RegionList: defineAsyncComponent(
       () => import("@/modules/entities/components/RegionList.vue")
+    ),
+    SectionTitle: defineAsyncComponent(
+      () => import("@/modules/ui/components/SectionTitle.vue")
     ),
   },
   setup() {

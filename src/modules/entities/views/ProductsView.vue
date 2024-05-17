@@ -1,14 +1,19 @@
 <template>
   <section>
-    <h1 class="text-3xl font-bold text-gray-600 my-10">Explore our Products</h1>
+    <section-title title="Explore our Products" />
   </section>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineAsyncComponent, defineComponent } from "vue";
 
 export default defineComponent({
   name: "ProductsView",
+  components: {
+    SectionTitle: defineAsyncComponent(
+      () => import("@/modules/ui/components/SectionTitle.vue")
+    ),
+  },
   setup() {
     return {};
   },
