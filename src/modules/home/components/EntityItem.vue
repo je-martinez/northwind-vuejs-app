@@ -16,7 +16,7 @@
     </ul>
     <router-link :to="{ name: id }">
       <a
-        class="flex justify-center items-center bg-blue-500 rounded-xl py-5 px-4 text-center text-white text-xl"
+        class="flex justify-center items-center bg-gray-800 rounded-xl py-5 px-4 text-center text-white text-xl"
       >
         Explore
         <img
