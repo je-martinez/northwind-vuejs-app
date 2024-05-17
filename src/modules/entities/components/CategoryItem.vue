@@ -21,7 +21,7 @@ export default defineComponent({
   },
   components: {
     GenericEntityCard: defineAsyncComponent(
-      () => import("@/modules/ui/components/GenericEntityCard.vue")
+      () => import("@/modules/entities/components/GenericEntityCard.vue")
     ),
   },
   setup() {
