@@ -9,6 +9,9 @@ const getters: GetterTree<ProductsState, StateInterface> = {
       (product) => product?.categoryId === categoryId
     );
   },
+  getProductById: (state: ProductsState) => (id: number) => {
+    return state.products?.find((product) => product.id === id);
+  },
   loading: (state: ProductsState) => state.loading,
   error: (state: ProductsState) => state.error,
 };

@@ -17,6 +17,9 @@ const getters: GetterTree<EmployeesState, StateInterface> = {
       };
     });
   },
+  getEmployeeById: (state) => (id: number) => {
+    return state.employees?.find((employee) => employee.id === id);
+  },
   loading: (state) => state.loading,
   error: (state) => state.error,
 };

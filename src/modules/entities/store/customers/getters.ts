@@ -11,6 +11,9 @@ const getters: GetterTree<CustomersState, StateInterface> = {
       };
     });
   },
+  getCustomerById: (state: CustomersState) => (id: string) => {
+    return state.customers?.find((customer) => customer.id === id);
+  },
   loading: (state: CustomersState) => state.loading,
   error: (state: CustomersState) => state.error,
 };
