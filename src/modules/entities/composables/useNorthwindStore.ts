@@ -52,5 +52,18 @@ export function useNorthwindStore() {
       () => store.getters["shippers/error"]
     ),
     fetchShippers: () => store.dispatch("shippers/fetchShippers"),
+    /**============================================
+     *               Customers
+     *=============================================**/
+    allCustomers: computed<Category[]>(
+      () => store.getters["customers/allCustomers"]
+    ),
+    loadingCustomers: computed<boolean>(
+      () => store.getters["customers/loading"]
+    ),
+    errorCustomers: computed<string | null | undefined>(
+      () => store.getters["customers/error"]
+    ),
+    fetchCustomers: () => store.dispatch("customers/fetchCustomers"),
   };
 }
