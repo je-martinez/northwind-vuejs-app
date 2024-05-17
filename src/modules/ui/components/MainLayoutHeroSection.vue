@@ -1,8 +1,8 @@
 <template>
   <div
-    class="hero min-h-screen bg-gradient-to-t from-gray-400 to-gray-900 flex flex-col justify-center items-center px-4"
+    class="hero py-20 xs:text-center bg-gradient-to-t from-gray-400 to-gray-900 flex flex-col justify-center items-center px-4"
   >
-    <h1 class="text-5xl font-bold text-white mb-8">
+    <h1 class="text-5xl text-center font-bold text-white mb-8">
       Welcome to the Northwind Database
     </h1>
     <p class="text-2xl text-gray-100 text-center px-16">
