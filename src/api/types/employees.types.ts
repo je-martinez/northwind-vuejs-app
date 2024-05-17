@@ -1,4 +1,7 @@
-export interface Employee {
+import { Order } from "./orders.types";
+import { Territory } from "./regions.types";
+
+export interface Employee extends EmployeeRelations {
   id: number;
   lastName: string;
   firstName: string;
@@ -19,6 +22,12 @@ export interface EmployeeAddress {
   postalCode: number | string;
   country: string;
   phone: string;
+}
+
+interface EmployeeRelations {
+  reportsToEmployee?: Employee;
+  territories?: Territory[];
+  orders?: Order[];
 }
 
 export type EmployeesResponse = Array<Employee>;

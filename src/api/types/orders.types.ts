@@ -1,6 +1,9 @@
+import { Customer } from "./customers.types";
+import { Employee } from "./employees.types";
 import { Countries, Regions } from "./general.types";
+import { Product } from "./products.types";
 
-export interface Order {
+export interface Order extends OrderRelations {
   id: number;
   customerId: string;
   employeeId: number;
@@ -14,7 +17,7 @@ export interface Order {
   details: OrderDetail[];
 }
 
-export interface OrderDetail {
+export interface OrderDetail extends OrderDetailRelations {
   productId: number;
   unitPrice: number;
   quantity: number;
@@ -27,6 +30,15 @@ export interface OrderShipAddress {
   region: Regions;
   postalCode: number;
   country: Countries;
+}
+
+interface OrderRelations {
+  customer?: Customer;
+  employee?: Employee;
+}
+
+interface OrderDetailRelations {
+  product?: Product;
 }
 
 export type OrdersResponse = Array<Order>;

@@ -1,6 +1,5 @@
 <template>
   <section>
-    <AppDescription />
     <h1 class="text-3xl font-bold text-gray-600 my-10">Explore our database</h1>
     <div
       class="grid xs:grid-cols-1 sm:grid-cols-3 md:grid-cols-2 lg:grid-cols-4 gap-4"
@@ -29,9 +28,6 @@ export default defineComponent({
   components: {
     EntityItem: defineAsyncComponent(
       () => import("../components/EntityItem.vue")
-    ),
-    AppDescription: defineAsyncComponent(
-      () => import("../components/AppDescription.vue")
     ),
   },
   setup() {

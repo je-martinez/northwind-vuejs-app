@@ -1,5 +1,6 @@
 <template>
   <MainLayoutHeader />
+  <main-layout-hero-section v-if="showHeroSection" />
   <main class="container mx-auto px-6 md:px-0">
     <router-view />
   </main>
@@ -7,7 +8,8 @@
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from "vue";
+import { computed, defineAsyncComponent, defineComponent } from "vue";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "HomeLayout",
@@ -15,9 +17,18 @@ export default defineComponent({
     MainLayoutHeader: defineAsyncComponent(
       () => import("../components/MainLayoutHeader.vue")
     ),
+    MainLayoutHeroSection: defineAsyncComponent(
+      () => import("../components/MainLayoutHeroSection.vue")
+    ),
     MainLayoutFooter: defineAsyncComponent(
       () => import("../components/MainLayoutFooter.vue")
     ),
+  },
+  setup() {
+    const { currentRoute } = useRouter();
+    return {
+      showHeroSection: computed(() => currentRoute.value.name === "home"),
+    };
   },
 });
 </script>

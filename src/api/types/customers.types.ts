@@ -1,4 +1,6 @@
-export interface Customer {
+import { Order } from "./orders.types";
+
+export interface Customer extends CustomerRelations {
   id: string;
   companyName: string;
   contactName: string;
@@ -13,6 +15,10 @@ export interface CustomerAddress {
   postalCode: number | string;
   country: string;
   phone: string;
+}
+
+interface CustomerRelations {
+  orders?: Order[];
 }
 
 export type CustomersResponse = Array<Customer>;
