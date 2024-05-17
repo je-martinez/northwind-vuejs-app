@@ -11,6 +11,14 @@ const routes: Array<RouteRecordRaw> = [
     ...homeRouter,
   },
   { ...entitiesRouter },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: () =>
+      import(
+        /* webpackChunkName: "not-found" */ "@/modules/ui/views/NotFoundView.vue"
+      ),
+  },
 ];
 
 const router = createRouter({
