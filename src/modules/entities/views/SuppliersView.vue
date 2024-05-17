@@ -11,10 +11,9 @@ import { defineComponent } from "vue";
 
 export default defineComponent({
   name: "SuppliersView",
+  components: {},
   setup() {
     return {};
   },
 });
 </script>
-
-<style></style>

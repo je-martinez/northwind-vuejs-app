@@ -1,16 +1,10 @@
 <template>
-  <div class="bg-white shadow w-full flex rounded-xl p-3">
-    <div class="w-2/3">
-      <img
-        v-if="region?.photos?.regular"
-        :src="region.photos.regular"
-        :alt="region.name"
-        class="w-20 h-20 object-cover rounded-lg"
-      />
-    </div>
-    <div class="w-2/3">
-      <h4 class="font-bold mb-3 text-md">{{ region.name }}</h4>
-      <h3 class="text-gray-400 mb-3 text-xs">Territories</h3>
+  <generic-entity-card
+    :photo="region?.photos?.regular"
+    :title="region.name"
+    subtitle="Territories"
+  >
+    <template v-slot:description>
       <ul class="list-disc">
         <li
           class="text-xs"
@@ -20,16 +14,21 @@
           {{ territory.name }}
         </li>
       </ul>
-    </div>
-  </div>
+    </template>
+  </generic-entity-card>
 </template>
 
 <script lang="ts">
 import { Region } from "@/api/types";
-import { defineComponent, PropType } from "vue";
+import { defineAsyncComponent, defineComponent, PropType } from "vue";
 
 export default defineComponent({
   name: "RegionItem",
+  components: {
+    GenericEntityCard: defineAsyncComponent(
+      () => import("@/modules/ui/components/GenericEntityCard.vue")
+    ),
+  },
   props: {
     region: {
       type: Object as PropType<Region>,
