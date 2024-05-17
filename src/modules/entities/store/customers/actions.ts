@@ -11,7 +11,7 @@ const actions: ActionTree<CustomersState, StateInterface> = {
       commit("setCustomers", response.data);
     } catch (error) {
       console.error(error);
-      commit("setError", "Error while fetching suppliers");
+      commit("setError", "Error while fetching customers");
     } finally {
       commit("setLoading", false);
     }

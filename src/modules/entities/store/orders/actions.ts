@@ -11,7 +11,7 @@ const actions: ActionTree<OrdersState, StateInterface> = {
       commit("setOrders", response.data);
     } catch (error) {
       console.error(error);
-      commit("setError", "Error while fetching suppliers");
+      commit("setError", "Error while fetching orders");
     } finally {
       commit("setLoading", false);
     }

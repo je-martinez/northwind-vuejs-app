@@ -16,6 +16,7 @@ export default defineComponent({
       fetchCustomers,
       fetchEmployees,
       fetchOrders,
+      fetchProducts,
     } = useNorthwindStore();
     fetchCategories();
     fetchRegions();
@@ -24,6 +25,7 @@ export default defineComponent({
     fetchCustomers();
     fetchEmployees();
     fetchOrders();
+    fetchProducts();
     return {};
   },
 });

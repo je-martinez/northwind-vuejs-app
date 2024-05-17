@@ -13,6 +13,8 @@ import type { EmployeesState } from "@/modules/entities/store/employees/state";
 import employees from "@/modules/entities/store/employees";
 import type { OrdersState } from "@/modules/entities/store/orders/state";
 import orders from "@/modules/entities/store/orders";
+import type { ProductsState } from "@/modules/entities/store/products/state";
+import products from "@/modules/entities/store/products";
 
 export interface StateInterface {
   categories: CategoriesState;
@@ -22,6 +24,7 @@ export interface StateInterface {
   customers: CustomersState;
   employees: EmployeesState;
   orders: OrdersState;
+  products: ProductsState;
 }
 
 export default createStore<StateInterface>({
@@ -33,5 +36,6 @@ export default createStore<StateInterface>({
     customers,
     employees,
     orders,
+    products,
   },
 });
