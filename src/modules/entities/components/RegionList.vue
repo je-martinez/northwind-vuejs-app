@@ -4,11 +4,7 @@
     :currentView="currentView"
     @update:currentView="($event) => (currentView = $event)"
   />
-  <table-list
-    v-if="currentView === availableViews.list"
-    :headers="headers"
-    :data="allRegions"
-  >
+  <table-list v-if="isList" :headers="headers" :data="allRegions">
     <template
       v-for="(region, index) in allRegions"
       :key="`tblc-territories-${index}`"
@@ -30,10 +26,10 @@
 </template>
 
 <script lang="ts">
-import { GridOrListConstants } from "@/modules/ui/constants";
 import { TableHeaderDefinition } from "@/modules/ui/types";
-import { defineAsyncComponent, defineComponent, ref } from "vue";
-import { useNorthwindStore } from "../composables";
+import { defineAsyncComponent, defineComponent } from "vue";
+import { useNorthwindStore } from "@/modules/entities/composables";
+import { useGridOrListToggle } from "@/modules/ui/composables";
 export default defineComponent({
   name: "RegionList",
   components: {
@@ -52,7 +48,7 @@ export default defineComponent({
   },
   setup() {
     const { allRegions } = useNorthwindStore();
-    const currentView = ref(GridOrListConstants.Grid);
+    const { currentView, isList } = useGridOrListToggle();
     const headers: TableHeaderDefinition[] = [
       {
         id: "name",
@@ -63,11 +59,8 @@ export default defineComponent({
         label: "Territories",
       },
     ];
-    const availableViews = ref({
-      grid: GridOrListConstants.Grid,
-      list: GridOrListConstants.List,
-    });
-    return { currentView, allRegions, headers, availableViews };
+
+    return { currentView, isList, allRegions, headers };
   },
 });
 </script>
