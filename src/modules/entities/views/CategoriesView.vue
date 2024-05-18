@@ -1,7 +1,6 @@
 <template>
   <section>
     <section-title title="Explore our categories" />
-
     <category-list />
   </section>
 </template>

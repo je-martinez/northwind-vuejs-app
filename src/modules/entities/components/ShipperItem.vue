@@ -1,21 +1,20 @@
 <template>
   <generic-entity-item
-    :photo="category?.photos?.regular"
-    :title="category?.name"
-    subtitle="Description"
-    :description="category?.description"
+    :title="shipper?.companyName"
+    subtitle="Contact Phone"
+    :description="shipper?.phone"
   />
 </template>
 
 <script lang="ts">
-import { Category } from "@/api/types";
+import { Shipper } from "@/api/types";
 import { defineAsyncComponent, defineComponent, PropType } from "vue";
 
 export default defineComponent({
-  name: "CategoryItem",
+  name: "ShipperItem",
   props: {
-    category: {
-      type: Object as PropType<Category>,
+    shipper: {
+      type: Object as PropType<Shipper>,
       required: true,
     },
   },

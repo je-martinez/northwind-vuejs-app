@@ -1,5 +1,5 @@
 <template>
-  <generic-entity-card
+  <generic-entity-item
     :photo="region?.photos?.regular"
     :title="region.name"
     subtitle="Territories"
@@ -15,7 +15,7 @@
         </li>
       </ul>
     </template>
-  </generic-entity-card>
+  </generic-entity-item>
 </template>
 
 <script lang="ts">
@@ -25,8 +25,8 @@ import { defineAsyncComponent, defineComponent, PropType } from "vue";
 export default defineComponent({
   name: "RegionItem",
   components: {
-    GenericEntityCard: defineAsyncComponent(
-      () => import("@/modules/entities/components/GenericEntityCard.vue")
+    GenericEntityItem: defineAsyncComponent(
+      () => import("@/modules/entities/components/GenericEntityItem.vue")
     ),
   },
   props: {

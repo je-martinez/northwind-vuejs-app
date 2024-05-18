@@ -1,6 +1,7 @@
 <template>
   <section>
     <section-title title="Explore our Shippers" />
+    <shipper-list />
   </section>
 </template>
 
@@ -12,6 +13,9 @@ export default defineComponent({
   components: {
     SectionTitle: defineAsyncComponent(
       () => import("@/modules/ui/components/SectionTitle.vue")
+    ),
+    ShipperList: defineAsyncComponent(
+      () => import("@/modules/entities/components/ShipperList.vue")
     ),
   },
   setup() {
