@@ -10,10 +10,12 @@
       v-else
       class="w-full grid gap-4 pb-8 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
     >
-      <shipper-item
+      <generic-entity-item
         v-for="shipper in allShippers"
         :key="shipper.id"
-        :shipper="shipper"
+        :title="shipper?.companyName"
+        subtitle="Contact Phone"
+        :description="shipper?.phone"
       />
     </div>
   </section>
@@ -31,8 +33,8 @@ export default defineComponent({
     GridOrListToggle: defineAsyncComponent(
       () => import("@/modules/ui/components/GridOrListToggle.vue")
     ),
-    ShipperItem: defineAsyncComponent(
-      () => import("@/modules/entities/components/ShipperItem.vue")
+    GenericEntityItem: defineAsyncComponent(
+      () => import("@/modules/entities/components/GenericEntityItem.vue")
     ),
     TableList: defineAsyncComponent(
       () => import("@/modules/ui/components/TableList.vue")

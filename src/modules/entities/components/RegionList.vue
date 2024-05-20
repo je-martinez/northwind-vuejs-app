@@ -17,11 +17,25 @@
     v-else
     class="w-full grid gap-4 pb-8 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4"
   >
-    <region-item
-      v-for="region in allRegions"
+    <generic-entity-item
       :key="region.id"
-      :region="region"
-    />
+      v-for="region in allRegions"
+      :photo="region?.photos?.regular"
+      :title="region.name"
+      subtitle="Territories"
+    >
+      <template v-slot:description>
+        <ul class="list-disc">
+          <li
+            class="text-xs"
+            v-for="territory in region.territories"
+            :key="territory.territoryId"
+          >
+            {{ territory.name }}
+          </li>
+        </ul>
+      </template>
+    </generic-entity-item>
   </div>
 </template>
 
@@ -33,9 +47,6 @@ import { useGridOrListToggle } from "@/modules/ui/composables";
 export default defineComponent({
   name: "RegionList",
   components: {
-    RegionItem: defineAsyncComponent(
-      () => import("@/modules/entities/components/RegionItem.vue")
-    ),
     RegionTerritories: defineAsyncComponent(
       () => import("@/modules/entities/components/RegionTerritories.vue")
     ),
@@ -44,6 +55,9 @@ export default defineComponent({
     ),
     GridOrListToggle: defineAsyncComponent(
       () => import("@/modules/ui/components/GridOrListToggle.vue")
+    ),
+    GenericEntityItem: defineAsyncComponent(
+      () => import("@/modules/entities/components/GenericEntityItem.vue")
     ),
   },
   setup() {

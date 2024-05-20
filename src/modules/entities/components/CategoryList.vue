@@ -10,10 +10,13 @@
       v-else
       class="w-full grid gap-4 pb-8 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
     >
-      <category-item
-        v-for="category in allCategories"
+      <generic-entity-item
         :key="category.id"
-        :category="category"
+        v-for="category in allCategories"
+        :photo="category?.photos?.regular"
+        :title="category?.name"
+        subtitle="Description"
+        :description="category?.description"
       />
     </div>
   </section>
@@ -27,8 +30,8 @@ import { useNorthwindStore } from "../composables";
 export default defineComponent({
   name: "CategoryList",
   components: {
-    CategoryItem: defineAsyncComponent(
-      () => import("@/modules/entities/components/CategoryItem.vue")
+    GenericEntityItem: defineAsyncComponent(
+      () => import("@/modules/entities/components/GenericEntityItem.vue")
     ),
     TableList: defineAsyncComponent(
       () => import("@/modules/ui/components/TableList.vue")
