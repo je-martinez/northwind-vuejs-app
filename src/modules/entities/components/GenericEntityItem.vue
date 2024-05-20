@@ -1,6 +1,6 @@
 <template>
   <div class="bg-white shadow w-full flex rounded-xl p-3">
-    <div v-if="hasRightSection" class="w-2/3">
+    <div v-if="hasRightSection || photo" class="w-2/3">
       <slot name="right-section">
         <img
           v-if="photo"

@@ -1,9 +1,12 @@
+import { UnsplashUrls } from "./unsplash.types";
+
 export interface Supplier {
   id: number;
   companyName: string;
   contactName: string;
   contactTitle?: string;
   address: SupplierAddress;
+  photos?: UnsplashUrls;
 }
 
 export interface SupplierAddress {

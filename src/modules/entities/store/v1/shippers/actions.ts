@@ -23,7 +23,6 @@ const actions: ActionTree<ShippersState, StateInterface> = {
   async fetchShippersPhotos({ commit }, shipper: Shipper) {
     try {
       const response = await searchPhotoByQuery(shipper.companyName);
-      console.log({ response });
       if (!response) {
         return;
       }
