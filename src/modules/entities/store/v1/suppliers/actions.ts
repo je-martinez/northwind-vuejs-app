@@ -8,7 +8,11 @@ const actions: ActionTree<SuppliersState, StateInterface> = {
     commit("setLoading", true);
     try {
       const response = await getSuppliers();
-      commit("setSuppliers", response.data);
+      const blacklist: number[] = [30];
+      commit(
+        "setSuppliers",
+        response.data?.filter((supplier) => !blacklist.includes(supplier.id))
+      );
     } catch (error) {
       console.error(error);
       commit("setError", "Error while fetching suppliers");

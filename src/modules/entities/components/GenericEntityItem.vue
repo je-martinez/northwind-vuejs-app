@@ -1,9 +1,9 @@
 <template>
   <div class="bg-white shadow w-full flex rounded-xl p-3">
-    <div class="w-2/3">
+    <div v-if="hasRightSection" class="w-2/3">
       <slot name="right-section">
         <img
-          :v-if="photo"
+          v-if="photo"
           :src="photo"
           :alt="title"
           class="w-20 h-20 object-cover rounded-lg"
@@ -51,8 +51,10 @@ export default defineComponent({
       required: false,
     },
   },
-  setup() {
-    return {};
+  setup(_, { slots }) {
+    return {
+      hasRightSection: slots["right-section"],
+    };
   },
 });
 </script>
