@@ -1,12 +1,17 @@
 <template>
   <div class="bg-white shadow w-full flex flex-col rounded-xl p-3">
     <div class="flex flex-row">
-      <div v-if="hasRightSection || getPhoto()" class="w-2/3">
+      <div v-if="hasRightSection || photo || notFoundPlaceholder" class="w-2/3">
         <slot name="left-section">
           <img
-            v-if="getPhoto()"
-            :src="getPhoto()"
+            v-if="photo"
+            :src="photo"
             :alt="title"
+            class="w-20 h-20 object-cover rounded-lg"
+          />
+          <img
+            v-else
+            src="@/assets/images/not-found.png"
             class="w-20 h-20 object-cover rounded-lg"
           />
         </slot>
@@ -64,14 +69,6 @@ export default defineComponent({
   setup(props, { slots }) {
     return {
       hasRightSection: slots["right-section"],
-      getPhoto: () => {
-        if (props.photo) {
-          return props.photo;
-        }
-        return props.notFoundPlaceholder
-          ? require("@/assets/images/not-found.png")
-          : undefined;
-      },
     };
   },
 });
