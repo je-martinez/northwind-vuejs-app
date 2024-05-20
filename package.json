@@ -13,6 +13,7 @@
     "axios": "^1.6.8",
     "unsplash-js": "^7.0.19",
     "vue": "^3.2.13",
+    "vue-country-flag-next": "^2.3.2",
     "vue-router": "^4.0.3",
     "vuex": "^4.0.0"
   },

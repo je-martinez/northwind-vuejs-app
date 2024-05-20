@@ -11,12 +11,13 @@
       class="w-full grid gap-4 pb-8 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
     >
       <generic-entity-item
-        v-for="shipper in allSuppliers"
-        :photo="shipper?.photos?.regular"
-        :key="shipper.id"
-        :title="shipper?.companyName"
+        v-for="supplier in allSuppliers"
+        :notFoundPlaceholder="true"
+        :photo="supplier?.photos?.regular"
+        :key="supplier.id"
+        :title="supplier?.companyName"
         subtitle="Contact Information"
-        :description="shipper?.contactName"
+        :description="supplier?.contactName"
       />
     </div>
   </section>
