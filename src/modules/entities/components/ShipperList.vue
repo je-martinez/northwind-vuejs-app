@@ -12,6 +12,7 @@
     >
       <generic-entity-item
         v-for="shipper in allShippers"
+        :photo="shipper?.photos?.regular"
         :key="shipper.id"
         :title="shipper?.companyName"
         subtitle="Contact Phone"
