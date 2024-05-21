@@ -1,8 +1,9 @@
 <template>
-  <tr>
+  <tr class="h-26">
     <td
       v-for="header in headers"
       :key="header?.toString()"
+      :class="header?.cellClasses"
       class="px-5 py-5 border-b border-gray-200 bg-white text-sm"
     >
       <slot

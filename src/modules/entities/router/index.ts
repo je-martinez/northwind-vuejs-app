@@ -38,6 +38,15 @@ export default {
         ),
     },
     {
+      path: "order/:id",
+      name: "order",
+      component: () =>
+        import(
+          /* webpackChunkName: "order-detail" */ "@/modules/entities/views/OrderDetailView.vue"
+        ),
+      props: (route) => ({ id: Number(route.query.id) }),
+    },
+    {
       path: "products",
       name: "products",
       component: () =>

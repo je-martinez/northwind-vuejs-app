@@ -244,6 +244,7 @@ export const CountryCodes = new Map([
   ["Uzbekistan", "uzb"],
   ["Vanuatu", "vut"],
   ["Venezuela (Bolivarian Republic of)", "ven"],
+  ["Venezuela", "ven"],
   ["Viet Nam", "vnm"],
   ["Virgin Islands (U.S.)", "vir"],
   ["Wallis and Futuna", "wlf"],

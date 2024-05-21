@@ -1,6 +1,8 @@
 export interface TableHeaderDefinition {
   id: string;
   label: string;
+  headerClasses?: string;
+  cellClasses?: string;
 }
 
 export interface TableDataDefinition {

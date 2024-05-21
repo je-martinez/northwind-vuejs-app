@@ -1,6 +1,15 @@
 import { useStore } from "vuex";
 import { computed } from "vue";
-import { Category, Region, Shipper, Supplier } from "@/api/types";
+import {
+  Category,
+  Customer,
+  Employee,
+  Order,
+  Product,
+  Region,
+  Shipper,
+  Supplier,
+} from "@/api/types";
 
 export function useNorthwindStore() {
   const store = useStore();
@@ -55,7 +64,7 @@ export function useNorthwindStore() {
     /**============================================
      *               Customers
      *=============================================**/
-    allCustomers: computed<Category[]>(
+    allCustomers: computed<Customer[]>(
       () => store.getters["customers/allCustomers"]
     ),
     loadingCustomers: computed<boolean>(
@@ -68,7 +77,7 @@ export function useNorthwindStore() {
     /**============================================
      *               Employees
      *=============================================**/
-    allEmployees: computed<Category[]>(
+    allEmployees: computed<Employee[]>(
       () => store.getters["employees/allEmployees"]
     ),
     loadingEmployees: computed<boolean>(
@@ -81,7 +90,7 @@ export function useNorthwindStore() {
     /**============================================
      *               Orders
      *=============================================**/
-    allOrders: computed<Category[]>(() => store.getters["orders/allOrders"]),
+    allOrders: computed<Order[]>(() => store.getters["orders/allOrders"]),
     loadingOrders: computed<boolean>(() => store.getters["orders/loading"]),
     errorOrders: computed<string | null | undefined>(
       () => store.getters["orders/error"]
@@ -90,7 +99,7 @@ export function useNorthwindStore() {
     /**============================================
      *               Products
      *=============================================**/
-    allProducts: computed<Category[]>(
+    allProducts: computed<Product[]>(
       () => store.getters["products/allProducts"]
     ),
     loadingProducts: computed<boolean>(() => store.getters["products/loading"]),
