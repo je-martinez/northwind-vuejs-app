@@ -1,29 +1,66 @@
 import { GetterTree } from "vuex";
 import { OrdersState } from "./state";
 import { StateInterface } from "@/store/v1";
+import { Customer, Employee, Order, Product } from "@/api/types";
+
+const getOrderRelations = (
+  order: Order | undefined,
+  rootGetters: {
+    "products/getProductById": (productId: number) => Product;
+    "customers/getCustomerById": (customerId: string) => Customer;
+    "employees/getEmployeeById": (employeeId: number) => Employee;
+  }
+) => {
+  if (!order) {
+    return;
+  }
+  return {
+    details: order.details?.map((orderDetail) => {
+      return {
+        ...orderDetail,
+        product: rootGetters["products/getProductById"](orderDetail.productId),
+      };
+    }),
+    customer: rootGetters["customers/getCustomerById"](order.customerId),
+    employee: rootGetters["employees/getEmployeeById"](order.employeeId),
+  };
+};
 
 const getters: GetterTree<OrdersState, StateInterface> = {
   allOrders: (state: OrdersState, _getters, _rootState, rootGetters) => {
     return state.orders?.map((order) => {
       return {
         ...order,
-        details: order.details?.map((detail) => {
-          return {
-            ...detail,
-            product: rootGetters["products/getProductById"](detail.productId),
-          };
-        }),
-        customer: rootGetters["customers/getCustomerById"](order.customerId),
-        employee: rootGetters["employees/getEmployeeById"](order.employeeId),
+        ...getOrderRelations(order, rootGetters),
       };
     });
   },
-  getOrdersByCustomerId: (state: OrdersState) => (customerId: string) => {
-    return state.orders?.filter((order) => order?.customerId === customerId);
-  },
-  getOrdersByEmployeeId: (state: OrdersState) => (employeeId: number) => {
-    return state.orders?.filter((order) => order?.employeeId === employeeId);
-  },
+  getOrdersByCustomerId:
+    (state: OrdersState, _getters, _rootState, rootGetters) =>
+    (customerId: string) => {
+      const orders = state.orders?.filter(
+        (order) => order?.customerId === customerId
+      );
+      return orders.map((order) => {
+        return {
+          ...order,
+          ...getOrderRelations(order, rootGetters),
+        };
+      });
+    },
+  getOrdersByEmployeeId:
+    (state: OrdersState, _getters, _rootState, rootGetters) =>
+    (employeeId: number) => {
+      const orders = state.orders?.filter(
+        (order) => order?.employeeId === employeeId
+      );
+      return orders.map((order) => {
+        return {
+          ...order,
+          ...getOrderRelations(order, rootGetters),
+        };
+      });
+    },
   loading: (state: OrdersState) => state.loading,
   error: (state: OrdersState) => state.error,
 };
