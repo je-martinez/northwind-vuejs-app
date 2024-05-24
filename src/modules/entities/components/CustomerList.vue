@@ -14,21 +14,7 @@
         :key="customer.id"
         v-slot:[`tblc-orders-${index}`]
       >
-        <div
-          class="grid grid-cols-4 h-full"
-          v-if="(customer?.orders?.length ?? 0) > 0"
-        >
-          <div v-for="order in customer.orders" :key="order.id">
-            <router-link :to="{ name: 'order', params: { id: order.id } }">
-              <span class="text-blue-500 underline"># {{ order.id }}</span>
-            </router-link>
-          </div>
-        </div>
-        <template v-else>
-          <div class="flex justify-center items-center h-28">
-            <p class="text-sm italic">No orders availables</p>
-          </div>
-        </template>
+        <orders-hyperlinks :orders="customer.orders" />
       </template>
     </table-list>
   </section>
@@ -49,6 +35,9 @@ export default defineComponent({
       () => import("@/modules/ui/components/TableList.vue")
     ),
     CountryFlag,
+    OrdersHyperlinks: defineAsyncComponent(
+      () => import("@/modules/entities/components/OrdersHyperlinks.vue")
+    ),
   },
   setup() {
     const headers: TableHeaderDefinition[] = [
