@@ -34,7 +34,7 @@ const getters: GetterTree<EmployeesState, StateInterface> = {
       };
     });
   },
-  getEmployeeWRelationsById:
+  getEmployeeById:
     (state, _getters, _rootState, rootGetters) => (id: number) => {
       const employee = state.employees?.find((employee) => employee.id === id);
       return {
@@ -42,7 +42,7 @@ const getters: GetterTree<EmployeesState, StateInterface> = {
         ...getRelationsPerEmployee(employee, state, rootGetters),
       };
     },
-  getEmployeeById: (state) => (id: number) => {
+  getEmployeeByIdNoRelations: (state) => (id: number) => {
     const employee = state.employees?.find((employee) => employee.id === id);
     return {
       ...employee,

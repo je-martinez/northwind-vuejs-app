@@ -7,8 +7,8 @@ const getOrderRelations = (
   order: Order | undefined,
   rootGetters: {
     "products/getProductById": (productId: number) => Product;
-    "customers/getCustomerById": (customerId: string) => Customer;
-    "employees/getEmployeeById": (employeeId: number) => Employee;
+    "customers/getCustomerByIdNoRelations": (customerId: string) => Customer;
+    "employees/getEmployeeByIdNoRelations": (employeeId: number) => Employee;
   }
 ) => {
   if (!order) {
@@ -21,8 +21,12 @@ const getOrderRelations = (
         product: rootGetters["products/getProductById"](orderDetail.productId),
       };
     }),
-    customer: rootGetters["customers/getCustomerById"](order.customerId),
-    employee: rootGetters["employees/getEmployeeById"](order.employeeId),
+    customer: rootGetters["customers/getCustomerByIdNoRelations"](
+      order.customerId
+    ),
+    employee: rootGetters["employees/getEmployeeByIdNoRelations"](
+      order.employeeId
+    ),
   };
 };
 

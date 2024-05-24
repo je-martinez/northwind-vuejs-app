@@ -26,7 +26,7 @@ const getters: GetterTree<CustomersState, StateInterface> = {
       };
     });
   },
-  getCustomerWRelationsById:
+  getCustomerById:
     (state: CustomersState, _getters, _rootState, rootGetters) =>
     (id: string) => {
       const customer = state.customers?.find((customer) => customer.id === id);
@@ -35,7 +35,7 @@ const getters: GetterTree<CustomersState, StateInterface> = {
         ...getCustomerRelations(customer, rootGetters),
       };
     },
-  getCustomerById: (state: CustomersState) => (id: string) => {
+  getCustomerByIdNoRelations: (state: CustomersState) => (id: string) => {
     const customer = state.customers?.find((customer) => customer.id === id);
     return { ...customer };
   },
