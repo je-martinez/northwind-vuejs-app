@@ -2,27 +2,30 @@
   <section>
     <table-list :headers="headers" :data="allEmployees">
       <template
-        v-for="(employee, index) in allEmployees"
-        :key="employee.id"
-        v-slot:[`tblc-orders-${index}`]
+        #tbl-row="{
+          row: employee,
+          defaultTrClasses,
+          defaultTdClasses,
+          defaultTdContent,
+        }"
       >
-        <orders-hyperlinks
-          v-if="employee.orders"
-          :cols="4"
-          :orders="employee.orders"
-        />
-      </template>
-      <template
-        v-for="(employee, index) in allEmployees"
-        :key="employee.id"
-        v-slot:[`tblc-territories-${index}`]
-      >
-        <div>
-          <region-territories
-            v-if="employee.territories"
-            :territories="employee.territories"
-          />
-        </div>
+        <tr :class="defaultTrClasses">
+          <td :class="defaultTdClasses">
+            <div :class="defaultTdContent">{{ employee.title }}</div>
+          </td>
+          <td :class="defaultTdClasses">
+            <div :class="defaultTdContent">{{ employee.firstName }}</div>
+          </td>
+          <td :class="defaultTdClasses">
+            <div :class="defaultTdContent">{{ employee.lastName }}</div>
+          </td>
+          <td :class="defaultTdClasses">
+            <orders-hyperlinks
+              v-if="employee.orders"
+              :orders="employee.orders"
+            />
+          </td>
+        </tr>
       </template>
     </table-list>
   </section>
@@ -42,9 +45,6 @@ export default defineComponent({
     OrdersHyperlinks: defineAsyncComponent(
       () => import("@/modules/entities/components/OrdersHyperlinks.vue")
     ),
-    RegionTerritories: defineAsyncComponent(
-      () => import("@/modules/entities/components/RegionTerritories.vue")
-    ),
   },
   setup() {
     const headers: TableHeaderDefinition[] = [
@@ -59,10 +59,6 @@ export default defineComponent({
       {
         id: "lastName",
         label: "Last Name",
-      },
-      {
-        id: "territories",
-        label: "Territories",
       },
       {
         id: "orders",
