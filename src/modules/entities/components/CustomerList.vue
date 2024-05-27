@@ -14,9 +14,10 @@
         :key="customer.id"
         v-slot:[`tblc-orders-${index}`]
       >
-        <orders-hyperlinks :orders="customer.orders" />
+        <orders-hyperlinks v-if="customer.orders" :orders="customer.orders" />
       </template>
     </table-list>
+    <!-- <modal-dialog /> -->
   </section>
 </template>
 
@@ -34,6 +35,9 @@ export default defineComponent({
     TableList: defineAsyncComponent(
       () => import("@/modules/ui/components/TableList.vue")
     ),
+    // ModalDialog: defineAsyncComponent(
+    //   () => import("@/modules/ui/components/ModalDialog.vue")
+    // ),
     CountryFlag,
     OrdersHyperlinks: defineAsyncComponent(
       () => import("@/modules/entities/components/OrdersHyperlinks.vue")

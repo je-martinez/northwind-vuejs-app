@@ -16,24 +16,27 @@
           </tr>
         </thead>
         <tbody>
-          <table-list-data-row
-            v-for="(row, rowIndex) in data"
-            :rowIndex="rowIndex"
-            :data="row"
-            :headers="headers"
-            :key="row.toString()"
-          >
-            <template
-              v-for="header in headers"
-              :key="header.toString()"
-              v-slot:[`${cellPrefix}${header.id}-${rowIndex}`]
+          <template v-for="rowData in data" :key="rowData.id">
+            <slot
+              :name="rowName"
+              :row="rowData"
+              :defaultTrClasses="defaultTrClasses"
+              :defaultTdClasses="defaultTdClasses"
+              :defaultTdContent="defaultTdContent"
             >
-              <slot
-                :name="`${cellPrefix}${header.id}-${rowIndex}`"
-                :data="row?.[header.id]"
-              />
-            </template>
-          </table-list-data-row>
+              <tr :class="defaultTrClasses">
+                <td
+                  v-for="header in headers"
+                  :key="header?.toString()"
+                  :class="[header?.cellClasses, defaultTdClasses]"
+                >
+                  <div :class="defaultTdContent">
+                    {{ rowData?.[header.id] }}
+                  </div>
+                </td>
+              </tr>
+            </slot>
+          </template>
         </tbody>
       </table>
       <!-- <table-list-navigation-buttons /> -->
@@ -42,7 +45,7 @@
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, defineComponent, PropType } from "vue";
+import { defineComponent, PropType } from "vue";
 import { TableHeaderDefinition, TableDataDefinition } from "../types";
 import { TableListConstants } from "../constants";
 
@@ -60,17 +63,28 @@ export default defineComponent({
     },
   },
   components: {
-    TableListDataRow: defineAsyncComponent(
-      () => import("@/modules/ui/components/TableListDataRow.vue")
-    ),
+    // TableListDataRow: defineAsyncComponent(
+    //   () => import("@/modules/ui/components/TableListDataRow.vue")
+    // ),
     // TableListNavigationButtons: defineAsyncComponent(
     //   () => import("@/modules/ui/components/TableListNavigationButtons.vue")
     // ),
   },
   setup() {
     const headerPrefix = TableListConstants.HeaderPrefix;
-    const cellPrefix = TableListConstants.CellPrefix;
-    return { headerPrefix, cellPrefix };
+    const rowName = TableListConstants.RowName;
+    const defaultTrClasses = "h-26";
+    const defaultTdClasses =
+      "px-5 py-5 border-b border-gray-200 bg-white text-sm";
+    const defaultTdContent = "text-gray-900 whitespace-no-wrap";
+
+    return {
+      headerPrefix,
+      rowName,
+      defaultTrClasses,
+      defaultTdClasses,
+      defaultTdContent,
+    };
   },
 });
 </script>

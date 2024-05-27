@@ -6,11 +6,16 @@
   />
   <table-list v-if="isList" :headers="headers" :data="allRegions">
     <template
-      v-for="(region, index) in allRegions"
-      :key="`tblc-territories-${index}`"
-      v-slot:[`tblc-territories-${index}`]
+      #tbl-row="{ row, defaultTrClasses, defaultTdClasses, defaultTdContent }"
     >
-      <region-territories :territories="region.territories" />
+      <tr :class="defaultTrClasses">
+        <td :class="defaultTdClasses">
+          <div :class="defaultTdContent">{{ row.name }}</div>
+        </td>
+        <td :class="defaultTdClasses">
+          <region-territories :territories="row.territories" />
+        </td>
+      </tr>
     </template>
   </table-list>
   <div
