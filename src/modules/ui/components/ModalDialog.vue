@@ -33,7 +33,7 @@
           </button>
         </div>
         <!-- Modal body -->
-        <div class="p-6 space-y-6">
+        <div>
           <slot name="body"></slot>
         </div>
         <!-- Modal footer -->

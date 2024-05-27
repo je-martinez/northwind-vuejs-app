@@ -20,21 +20,35 @@
             <div :class="defaultTdContent">{{ employee.lastName }}</div>
           </td>
           <td :class="defaultTdClasses">
-            <orders-hyperlinks
-              v-if="employee.orders"
-              :orders="employee.orders"
-            />
+            <button
+              v-if="employee.orders?.length"
+              @click="selectEmployee(employee)"
+              class="px-4 py-2 bg-white hover:bg-opacity-75 text-gray-600 font-bold rounded-md shadow-md"
+            >
+              View Orders
+            </button>
+            <template v-else>
+              <div class="text-sm italic">No orders availables</div>
+            </template>
           </td>
         </tr>
       </template>
     </table-list>
+    <template v-if="selectedEmployee?.orders?.length > 0">
+      <order-list-modal
+        :show="show"
+        :orders="selectedEmployee?.orders"
+        @close="show = false"
+      />
+    </template>
   </section>
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, defineComponent } from "vue";
+import { defineAsyncComponent, defineComponent, ref } from "vue";
 import { useNorthwindStore } from "@/modules/entities/composables";
 import { TableHeaderDefinition } from "@/modules/ui/types";
+import { Employee } from "@/api/types";
 
 export default defineComponent({
   name: "EmployeeList",
@@ -42,11 +56,13 @@ export default defineComponent({
     TableList: defineAsyncComponent(
       () => import("@/modules/ui/components/TableList.vue")
     ),
-    OrdersHyperlinks: defineAsyncComponent(
-      () => import("@/modules/entities/components/OrdersHyperlinks.vue")
+    OrderListModal: defineAsyncComponent(
+      () => import("@/modules/entities/components/OrderListModal.vue")
     ),
   },
   setup() {
+    const selectedEmployee = ref<Employee | null>(null);
+    const show = ref(false);
     const headers: TableHeaderDefinition[] = [
       {
         id: "title",
@@ -66,7 +82,11 @@ export default defineComponent({
       },
     ];
     const { allEmployees } = useNorthwindStore();
-    return { allEmployees, headers };
+    const selectEmployee = (employee: Employee) => {
+      selectedEmployee.value = employee;
+      show.value = true;
+    };
+    return { selectedEmployee, selectEmployee, allEmployees, show, headers };
   },
 });
 </script>

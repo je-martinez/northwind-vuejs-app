@@ -32,15 +32,14 @@
         </tr>
       </template>
     </table-list>
-    <modal-dialog :show="show" @close="show = false">
-      <template #header>Orders</template>
-      <template #body>
-        <orders-hyperlinks
-          v-if="selectedCustomer?.orders"
-          :orders="selectedCustomer.orders"
-        />
-      </template>
-    </modal-dialog>
+
+    <template v-if="selectedCustomer?.orders?.length > 0">
+      <order-list-modal
+        :show="show"
+        :orders="selectedCustomer?.orders"
+        @close="show = false"
+      />
+    </template>
   </section>
 </template>
 
@@ -58,12 +57,9 @@ export default defineComponent({
     TableList: defineAsyncComponent(
       () => import("@/modules/ui/components/TableList.vue")
     ),
-    ModalDialog: defineAsyncComponent(
-      () => import("@/modules/ui/components/ModalDialog.vue")
-    ),
     CountryFlag,
-    OrdersHyperlinks: defineAsyncComponent(
-      () => import("@/modules/entities/components/OrdersHyperlinks.vue")
+    OrderListModal: defineAsyncComponent(
+      () => import("@/modules/entities/components/OrderListModal.vue")
     ),
   },
   setup() {
