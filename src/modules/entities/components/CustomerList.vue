@@ -3,18 +3,27 @@
   <section>
     <table-list :headers="headers" :data="allCustomers">
       <template
-        v-for="(customer, index) in allCustomers"
-        :key="customer.id"
-        v-slot:[`tblc-country-${index}`]
+        #tbl-row="{
+          row: customer,
+          defaultTrClasses,
+          defaultTdClasses,
+          defaultTdContent,
+        }"
       >
-        <country-flag :country="getFlag(customer?.address?.country)" />
-      </template>
-      <template
-        v-for="(customer, index) in allCustomers"
-        :key="customer.id"
-        v-slot:[`tblc-orders-${index}`]
-      >
-        <orders-hyperlinks v-if="customer.orders" :orders="customer.orders" />
+        <tr :class="defaultTrClasses">
+          <td :class="defaultTdClasses">
+            <country-flag :country="getFlag(customer?.address?.country)" />
+          </td>
+          <td :class="defaultTdClasses">
+            <div :class="defaultTdContent">{{ customer.companyName }}</div>
+          </td>
+          <td :class="defaultTdClasses">
+            <orders-hyperlinks
+              v-if="customer.orders"
+              :orders="customer.orders"
+            />
+          </td>
+        </tr>
       </template>
     </table-list>
     <!-- <modal-dialog /> -->

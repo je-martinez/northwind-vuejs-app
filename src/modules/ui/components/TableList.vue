@@ -72,7 +72,7 @@ export default defineComponent({
   },
   setup() {
     const headerPrefix = TableListConstants.HeaderPrefix;
-    const rowName = TableListConstants.RowName;
+    const rowName = TableListConstants.TableSlotName;
     const defaultTrClasses = "h-26";
     const defaultTdClasses =
       "px-5 py-5 border-b border-gray-200 bg-white text-sm";

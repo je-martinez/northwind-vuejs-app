@@ -6,14 +6,19 @@
   />
   <table-list v-if="isList" :headers="headers" :data="allRegions">
     <template
-      #tbl-row="{ row, defaultTrClasses, defaultTdClasses, defaultTdContent }"
+      #tbl-row="{
+        row: region,
+        defaultTrClasses,
+        defaultTdClasses,
+        defaultTdContent,
+      }"
     >
       <tr :class="defaultTrClasses">
         <td :class="defaultTdClasses">
-          <div :class="defaultTdContent">{{ row.name }}</div>
+          <div :class="defaultTdContent">{{ region.name }}</div>
         </td>
         <td :class="defaultTdClasses">
-          <region-territories :territories="row.territories" />
+          <region-territories :territories="region.territories" />
         </td>
       </tr>
     </template>
