@@ -7,15 +7,10 @@
     >
       <div v-for="order in orders" :key="order.id">
         <router-link :to="{ name: 'order', params: { id: order.id } }">
-          <span class="text-blue-500 underline text-xs"># {{ order.id }}</span>
+          <span class="text-blue-500 underline text-md"># {{ order.id }}</span>
         </router-link>
       </div>
     </div>
-    <template v-else>
-      <div class="flex justify-center items-center h-28">
-        <p class="text-xs italic">No orders availables</p>
-      </div>
-    </template>
   </div>
 </template>
 
