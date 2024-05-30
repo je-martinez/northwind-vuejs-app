@@ -7,16 +7,20 @@
             <th
               v-for="header in headers"
               :key="header.id"
-              class="px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider"
+              :class="defaultThClasses"
             >
-              <slot :name="`${headerPrefix}${header.id}`">
+              <slot
+                :name="headerName"
+                :header="header"
+                :defaultThClasses="defaultThClasses"
+              >
                 {{ header.label }}
               </slot>
             </th>
           </tr>
         </thead>
         <tbody>
-          <template v-for="rowData in data" :key="rowData.id">
+          <template v-for="rowData in currentElements" :key="rowData.id">
             <slot
               :name="rowName"
               :row="rowData"
@@ -39,13 +43,34 @@
           </template>
         </tbody>
       </table>
-      <!-- <table-list-navigation-buttons /> -->
+      <div
+        class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between"
+      >
+        <span class="text-xs xs:text-sm text-gray-900">
+          Showing {{ showingEntries }} of {{ data?.length }} Entries
+        </span>
+        <div class="inline-flex mt-2 xs:mt-0">
+          <button
+            @click="prevPage"
+            class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-l"
+          >
+            Prev
+          </button>
+          &nbsp; &nbsp;
+          <button
+            @click="nextPage"
+            class="text-sm text-indigo-50 transition duration-150 hover:bg-indigo-500 bg-indigo-600 font-semibold py-2 px-4 rounded-r"
+          >
+            Next
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { computed, defineComponent, PropType, ref } from "vue";
 import { TableHeaderDefinition, TableDataDefinition } from "../types";
 import { TableListConstants } from "../constants";
 
@@ -62,28 +87,57 @@ export default defineComponent({
       required: false,
     },
   },
-  components: {
-    // TableListDataRow: defineAsyncComponent(
-    //   () => import("@/modules/ui/components/TableListDataRow.vue")
-    // ),
-    // TableListNavigationButtons: defineAsyncComponent(
-    //   () => import("@/modules/ui/components/TableListNavigationButtons.vue")
-    // ),
-  },
-  setup() {
-    const headerPrefix = TableListConstants.HeaderPrefix;
+  components: {},
+  setup(props) {
+    const headerName = TableListConstants.HeaderSlotName;
     const rowName = TableListConstants.TableSlotName;
     const defaultTrClasses = "h-26";
     const defaultTdClasses =
       "px-5 py-5 border-b border-gray-200 bg-white text-sm";
     const defaultTdContent = "text-gray-900 whitespace-no-wrap";
+    const defaultThClasses =
+      "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider";
+
+    const currentPage = ref(1);
+    const currentPageSize = ref(10);
+    const currentElements = computed(() => {
+      const start = (currentPage.value - 1) * currentPageSize.value;
+      const end = start + currentPageSize.value;
+      return props?.data?.slice(start, end);
+    });
+
+    const numberOfPages = computed(() => {
+      if (!props?.data?.length) return 1;
+      return Math.ceil(props?.data?.length / currentPageSize.value);
+    });
+
+    const nextPage = () => {
+      if (currentPage.value < numberOfPages.value) currentPage.value++;
+    };
+
+    const prevPage = () => {
+      if (currentPage.value > 1) currentPage.value--;
+    };
+
+    const showingEntries = computed(() => {
+      if (!currentElements.value?.length) return 0;
+      if (currentPage.value === numberOfPages.value) return props?.data?.length;
+      return currentPage.value * (currentElements.value?.length ?? 1);
+    });
 
     return {
-      headerPrefix,
+      headerName,
       rowName,
       defaultTrClasses,
       defaultTdClasses,
       defaultTdContent,
+      defaultThClasses,
+      currentElements,
+      currentPage,
+      currentPageSize,
+      showingEntries,
+      nextPage,
+      prevPage,
     };
   },
 });

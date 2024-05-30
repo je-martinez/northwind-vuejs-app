@@ -1,4 +1,4 @@
 export enum TableListConstants {
-  HeaderPrefix = "tblh-",
+  HeaderSlotName = "tbl-header",
   TableSlotName = "tbl-row",
 }
