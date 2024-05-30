@@ -86,6 +86,11 @@ export default defineComponent({
       type: Array as PropType<TableDataDefinition[]>,
       required: false,
     },
+    pageSize: {
+      type: Number,
+      required: false,
+      default: 10,
+    },
   },
   components: {},
   setup(props) {
@@ -99,7 +104,7 @@ export default defineComponent({
       "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider";
 
     const currentPage = ref(1);
-    const currentPageSize = ref(10);
+    const currentPageSize = ref(props.pageSize);
     const currentElements = computed(() => {
       const start = (currentPage.value - 1) * currentPageSize.value;
       const end = start + currentPageSize.value;

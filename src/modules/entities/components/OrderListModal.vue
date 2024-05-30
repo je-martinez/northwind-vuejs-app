@@ -2,7 +2,7 @@
   <modal-dialog :show="show" @close="onClose">
     <template #header>Orders</template>
     <template #body>
-      <div class="max-h-96 overflow-y-auto p-4">
+      <div class="p-4">
         <orders-hyperlinks v-if="orders" :orders="orders" />
       </div>
     </template>

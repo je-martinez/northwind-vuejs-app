@@ -1,22 +1,38 @@
 <template>
-  <div>
-    <div
-      v-if="(orders?.length ?? 0) > 0"
-      class="grid grid-cols-12 h-full"
-      :style="`grid-template-columns: repeat(${cols}, minmax(0, 1fr));`"
-    >
-      <div v-for="order in orders" :key="order.id">
-        <router-link :to="{ name: 'order', params: { id: order.id } }">
-          <span class="text-blue-500 underline text-md"># {{ order.id }}</span>
-        </router-link>
-      </div>
-    </div>
+  <div class="min-h-[30rem]">
+    <table-list :headers="headers" :data="orders" :page-size="5">
+      <template
+        #tbl-row="{
+          row: order,
+          defaultTrClasses,
+          defaultTdClasses,
+          defaultTdContent,
+        }"
+      >
+        <tr :class="defaultTrClasses">
+          <td :class="defaultTdClasses">
+            <div :class="defaultTdContent">
+              {{ formatDate(order.orderDate) }}
+            </div>
+          </td>
+          <td :class="defaultTdClasses">
+            <router-link :to="{ name: 'order', params: { id: order.id } }">
+              <span class="text-blue-500 underline text-md"
+                ># {{ order.id }}</span
+              >
+            </router-link>
+          </td>
+        </tr>
+      </template>
+    </table-list>
   </div>
 </template>
 
 <script lang="ts">
 import { Order } from "@/api/types";
-import { defineComponent, PropType } from "vue";
+import { TableHeaderDefinition } from "@/modules/ui/types";
+import { defineAsyncComponent, defineComponent, PropType } from "vue";
+import * as dayjs from "dayjs";
 
 export default defineComponent({
   name: "OrdersHyperlinks",
@@ -25,13 +41,29 @@ export default defineComponent({
       type: Array as PropType<Order[]>,
       required: true,
     },
-    cols: {
-      type: Number,
-      default: 4,
-    },
+  },
+  components: {
+    TableList: defineAsyncComponent(
+      () => import("@/modules/ui/components/TableList.vue")
+    ),
   },
   setup() {
-    return {};
+    const headers: TableHeaderDefinition[] = [
+      {
+        id: "orderDate",
+        label: "Order Date",
+      },
+      {
+        id: "id",
+        label: "Order ID",
+      },
+    ];
+
+    const formatDate = (date: Date) => {
+      return dayjs.default(date).format("YYYY-MM-DD");
+    };
+
+    return { headers, formatDate };
   },
 });
 </script>

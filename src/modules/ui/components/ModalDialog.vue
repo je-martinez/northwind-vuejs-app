@@ -2,7 +2,7 @@
   <div
     id="default-modal"
     :class="{ 'hidden overflow-x-hidden': !props.show }"
-    class="flex backdrop-brightness-25 overflow-y-auto fixed h-modal md:h-full top-4 left-0 right-0 md:inset-0 z-50 justify-center items-center"
+    class="flex backdrop-brightness-25 overflow-y-auto fixed h-full md:h-full top-0 left-0 right-0 md:inset-0 z-50 justify-center items-center"
   >
     <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
       <!-- Modal content -->
@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, watch } from "vue";
 
 export default defineComponent({
   name: "ModalDialog",
@@ -69,9 +69,19 @@ export default defineComponent({
     const onClose = () => {
       emit("close");
     };
+
+    watch(
+      () => props.show,
+      (value) => {
+        if (value) {
+          document.body.style.overflow = "hidden";
+        } else {
+          document.body.style.overflow = "auto";
+        }
+      }
+    );
+
     return { props, slots, onClose };
   },
 });
 </script>
-
-<style></style>
