@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch } from "vue";
+import { defineComponent, onMounted, watch } from "vue";
 
 export default defineComponent({
   name: "ModalDialog",
@@ -74,12 +74,24 @@ export default defineComponent({
       () => props.show,
       (value) => {
         if (value) {
-          document.body.style.overflow = "hidden";
+          document
+            .getElementsByTagName("body")[0]
+            .classList.add("overflow-hidden");
         } else {
-          document.body.style.overflow = "auto";
+          document
+            .getElementsByTagName("body")[0]
+            .classList.remove("overflow-hidden");
         }
       }
     );
+
+    onMounted(() => {
+      if (props.show) {
+        document
+          .getElementsByTagName("body")[0]
+          .classList.add("overflow-hidden");
+      }
+    });
 
     return { props, slots, onClose };
   },
