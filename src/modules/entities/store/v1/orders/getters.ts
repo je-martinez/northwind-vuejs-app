@@ -65,6 +65,15 @@ const getters: GetterTree<OrdersState, StateInterface> = {
         };
       });
     },
+  getOrderById:
+    (state: OrdersState, _getters, _rootState, rootGetters) =>
+    (orderId: number) => {
+      const order = state.orders?.find((order) => order.id === orderId);
+      return {
+        ...order,
+        ...getOrderRelations(order, rootGetters),
+      };
+    },
   loading: (state: OrdersState) => state.loading,
   error: (state: OrdersState) => state.error,
 };

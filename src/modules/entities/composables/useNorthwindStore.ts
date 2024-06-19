@@ -91,6 +91,8 @@ export function useNorthwindStore() {
      *               Orders
      *=============================================**/
     allOrders: computed<Order[]>(() => store.getters["orders/allOrders"]),
+    getOrderById: (id: number) =>
+      computed<Order>(() => store.getters["orders/getOrderById"](id)),
     loadingOrders: computed<boolean>(() => store.getters["orders/loading"]),
     errorOrders: computed<string | null | undefined>(
       () => store.getters["orders/error"]

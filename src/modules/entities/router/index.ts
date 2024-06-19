@@ -44,7 +44,9 @@ export default {
         import(
           /* webpackChunkName: "order-detail" */ "@/modules/entities/views/OrderDetailView.vue"
         ),
-      props: (route) => ({ id: Number(route.query.id) }),
+      props: (route) => {
+        return { id: Number(route.params.id) };
+      },
     },
     {
       path: "products",

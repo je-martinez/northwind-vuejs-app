@@ -49,7 +49,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, watch } from "vue";
+import { defineComponent, onMounted, onUnmounted, watch } from "vue";
 
 export default defineComponent({
   name: "ModalDialog",
@@ -70,27 +70,31 @@ export default defineComponent({
       emit("close");
     };
 
+    const toogleBodyClass = (show: boolean) => {
+      if (show) {
+        document
+          .getElementsByTagName("body")[0]
+          .classList.add("overflow-hidden");
+      } else {
+        document
+          .getElementsByTagName("body")[0]
+          .classList.remove("overflow-hidden");
+      }
+    };
+
     watch(
       () => props.show,
       (value) => {
-        if (value) {
-          document
-            .getElementsByTagName("body")[0]
-            .classList.add("overflow-hidden");
-        } else {
-          document
-            .getElementsByTagName("body")[0]
-            .classList.remove("overflow-hidden");
-        }
+        toogleBodyClass(value);
       }
     );
 
     onMounted(() => {
-      if (props.show) {
-        document
-          .getElementsByTagName("body")[0]
-          .classList.add("overflow-hidden");
-      }
+      toogleBodyClass(props.show);
+    });
+
+    onUnmounted(() => {
+      toogleBodyClass(false);
     });
 
     return { props, slots, onClose };

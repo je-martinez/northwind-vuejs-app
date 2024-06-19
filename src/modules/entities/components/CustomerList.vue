@@ -33,7 +33,7 @@
       </template>
     </table-list>
 
-    <template v-if="selectedCustomer?.orders?.length > 0">
+    <template v-if="(selectedCustomer?.orders?.length ?? 0) > 0">
       <order-list-modal
         :show="show"
         :orders="selectedCustomer?.orders"
