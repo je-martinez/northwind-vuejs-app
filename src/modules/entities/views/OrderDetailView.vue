@@ -2,6 +2,7 @@
   <section>
     <!-- Invoice Template -->
     <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg my-10">
+      <!-- Header -->
       <order-header />
 
       <!-- Invoice Details -->
