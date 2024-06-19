@@ -8,7 +8,7 @@
         <span class="block text-2xl font-semibold">{{ title }}</span>
       </div>
     </div>
-    <ul class="mb-7 font-medium text-gray-500">
+    <ul class="mb-7 font-medium text-gray-500 min-h-24 h-24">
       <li class="flex text-lg mb-2">
         <img src="https://res.cloudinary.com/williamsondesign/check-grey.svg" />
         <span class="ml-3">{{ description }}</span>
