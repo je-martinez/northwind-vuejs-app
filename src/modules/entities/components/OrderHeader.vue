@@ -5,8 +5,10 @@
   >
     <div class="mb-4 sm:mb-0">
       <h1 class="text-4xl font-bold text-gray-800">Invoice</h1>
-      <p class="text-sm text-gray-600">Invoice #{{ orderNumber }}</p>
-      <p class="text-sm text-gray-600">Date: {{ formatedDate }}</p>
+      <p class="text-sm text-gray-600">
+        Invoice #{{ orderHeader.orderNumber }}
+      </p>
+      <p class="text-sm text-gray-600">Date: {{ orderHeader.orderDate }}</p>
     </div>
     <div class="text-left sm:text-right">
       <div class="flex sm:justify-start mt-8 md:mt-0 md:justify-center">
@@ -26,66 +28,24 @@
   <!-- Bill To -->
   <div class="mb-8">
     <h3 class="text-lg font-semibold text-gray-800 mb-2">Bill To:</h3>
-    <p class="text-sm text-gray-600">{{ customerName }}</p>
-    <p class="text-sm text-gray-600">{{ customerAddressLine1 }}</p>
-    <p class="text-sm text-gray-600">{{ customerAddressLine2 }}</p>
-    <p class="text-sm text-gray-600">Email: {{ customerEmail }}</p>
+    <p class="text-sm text-gray-600">{{ orderHeader.customerName }}</p>
+    <p class="text-sm text-gray-600">{{ orderHeader.customerAddressLine1 }}</p>
+    <p class="text-sm text-gray-600">{{ orderHeader.customerAddressLine2 }}</p>
+    <p class="text-sm text-gray-600">Email: {{ orderHeader.customerEmail }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, PropType } from "vue";
-import { Order } from "@/api/types";
-import {
-  formatDate,
-  removeSpacesAndSpecialCharacters,
-} from "@/modules/entities/utils";
+import { defineComponent, PropType } from "vue";
+import { OrderHeader } from "@/modules/entities/types";
 
 export default defineComponent({
   name: "OrderHeader",
   props: {
-    order: {
-      type: Object as PropType<Order>,
+    orderHeader: {
+      type: Object as PropType<OrderHeader>,
       required: true,
     },
-  },
-  setup(props) {
-    const formatedDate = formatDate(props.order.orderDate, "MMM DD, YYYY");
-
-    const orderNumber = computed(() => props.order.id);
-
-    const customerName = computed(
-      () => props.order.customer?.companyName ?? ""
-    );
-
-    const customerAddressLine1 = computed(
-      () => props?.order?.customer?.address?.street
-    );
-
-    const customerAddressLine2 = computed(() => {
-      const { city, country, postalCode } =
-        props?.order?.customer?.address ?? {};
-      return `${city === "NULL" ? "N/A" : city} , ${
-        country === "NULL" ? "N/A" : country
-      }, ${postalCode === "NULL" ? "N/A" : postalCode}`;
-    });
-
-    const customerEmail = computed(() =>
-      props.order.customer?.companyName
-        ? `info@${removeSpacesAndSpecialCharacters(
-            props.order.customer?.companyName ?? ""
-          ).toLocaleLowerCase()}.com`
-        : ""
-    );
-
-    return {
-      orderNumber,
-      customerName,
-      customerAddressLine1,
-      customerAddressLine2,
-      customerEmail,
-      formatedDate,
-    };
   },
 });
 </script>

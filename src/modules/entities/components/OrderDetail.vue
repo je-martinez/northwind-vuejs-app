@@ -25,13 +25,13 @@
           </th>
         </tr>
       </thead>
-      <tbody v-if="order.details?.length > 0">
+      <tbody v-if="order.detail?.length > 0">
         <tr
-          v-for="item of order.details"
-          :key="`order-${order.id}-row-${item.productId}`"
+          v-for="item of order.detail"
+          :key="`order-${order.orderNumber}-row-${item.productId}`"
         >
           <td class="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">
-            {{ item?.product?.name }}
+            {{ item?.productName }}
           </td>
           <td
             class="py-2 px-4 border-b border-gray-200 text-right text-sm text-gray-700"
@@ -41,12 +41,12 @@
           <td
             class="py-2 px-4 border-b border-gray-200 text-right text-sm text-gray-700"
           >
-            {{ getFormattedCurrency(item.unitPrice) }}
+            {{ getFormattedCurrency(item.price) }}
           </td>
           <td
             class="py-2 px-4 border-b border-gray-200 text-right text-sm text-gray-700"
           >
-            {{ getFormattedCurrency(item.quantity * item.unitPrice) }}
+            {{ getFormattedCurrency(item.total) }}
           </td>
         </tr>
       </tbody>
@@ -61,7 +61,7 @@
           <td
             class="py-2 px-4 border-t border-gray-200 text-right text-sm text-gray-700"
           >
-            {{ getFormattedCurrency(subTotal) }}
+            {{ getFormattedCurrency(order.total) }}
           </td>
         </tr>
         <tr>
@@ -74,7 +74,7 @@
           <td
             class="py-2 px-4 border-t border-gray-200 text-right text-sm text-gray-700"
           >
-            {{ getFormattedCurrency(tax) }}
+            {{ getFormattedCurrency(order.taxes) }}
           </td>
         </tr>
         <tr>
@@ -87,7 +87,7 @@
           <td
             class="py-2 px-4 border-t border-gray-200 text-right text-sm text-gray-700"
           >
-            {{ getFormattedCurrency(total) }}
+            {{ getFormattedCurrency(order.total) }}
           </td>
         </tr>
       </tfoot>
@@ -97,46 +97,29 @@
 
 <script lang="ts">
 import { Order } from "@/api/types";
-import { computed, defineComponent, PropType } from "vue";
+import { defineComponent, PropType } from "vue";
 import { useIntl } from "vue-intl";
-import { ORDER_TAX_PERCENTAGE } from "@/modules/entities/constants";
+import { OrderContent } from "../types";
 
 export default defineComponent({
   name: "OrderDetail",
   props: {
     order: {
-      type: Object as PropType<Order>,
+      type: Object as PropType<OrderContent>,
       required: true,
     },
   },
-  setup(props) {
+  setup() {
     const intl = useIntl();
-
     const getFormattedCurrency = (value: number) => {
       return intl.formatNumber(value, { style: "currency", currency: "USD" });
     };
-
     const getFormattedNumber = (value: number) => {
       return intl.formatNumber(value, {
         minimumFractionDigits: 2,
       });
     };
-
-    const subTotal = computed(() => {
-      return props.order.details?.reduce((acc, item) => {
-        return acc + item.quantity * item.unitPrice;
-      }, 0);
-    });
-
-    const tax = computed(() => {
-      return subTotal.value * ORDER_TAX_PERCENTAGE;
-    });
-
-    const total = computed(() => {
-      return subTotal.value + tax.value;
-    });
-
-    return { getFormattedNumber, getFormattedCurrency, subTotal, tax, total };
+    return { getFormattedNumber, getFormattedCurrency };
   },
 });
 </script>

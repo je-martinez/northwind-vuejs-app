@@ -3,10 +3,10 @@
     <!-- Invoice Template -->
     <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg my-10">
       <!-- Header -->
-      <order-header v-if="order" :order="order" />
+      <order-header v-if="orderHeader" :orderHeader="orderHeader" />
 
       <!-- Invoice Details -->
-      <order-detail v-if="order" :order="order" />
+      <order-detail v-if="orderContent" :order="orderContent" />
 
       <!-- Footer -->
       <order-footer />
@@ -16,7 +16,8 @@
 
 <script lang="ts">
 import { useNorthwindStore } from "@/modules/entities/composables";
-import { defineAsyncComponent, defineComponent } from "vue";
+import { computed, defineAsyncComponent, defineComponent } from "vue";
+import { orderMapper } from "@/modules/entities/mappers";
 
 export default defineComponent({
   name: "OrderDetailView",
@@ -42,7 +43,12 @@ export default defineComponent({
 
     const order = getOrderById(props.id);
 
-    return { order };
+    const orderHeader = computed(() => orderMapper.toOrderHeader(order.value));
+    const orderContent = computed(() =>
+      orderMapper.toOrderContent(order.value)
+    );
+
+    return { orderHeader, orderContent };
   },
 });
 </script>
