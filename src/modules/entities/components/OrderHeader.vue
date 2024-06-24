@@ -53,16 +53,21 @@ export default defineComponent({
     const formatedDate = formatDate(props.order.orderDate, "MMM DD, YYYY");
 
     const orderNumber = computed(() => props.order.id);
+
     const customerName = computed(
       () => props.order.customer?.companyName ?? ""
     );
+
     const customerAddressLine1 = computed(
       () => props?.order?.customer?.address?.street
     );
+
     const customerAddressLine2 = computed(() => {
       const { city, country, postalCode } =
         props?.order?.customer?.address ?? {};
-      return `${city}, ${country}, ${postalCode}`;
+      return `${city === "NULL" ? "N/A" : city} , ${
+        country === "NULL" ? "N/A" : country
+      }, ${postalCode === "NULL" ? "N/A" : postalCode}`;
     });
 
     const customerEmail = computed(() =>
