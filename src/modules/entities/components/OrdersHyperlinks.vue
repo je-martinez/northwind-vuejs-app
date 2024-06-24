@@ -32,7 +32,7 @@
 import { Order } from "@/api/types";
 import { TableHeaderDefinition } from "@/modules/ui/types";
 import { defineAsyncComponent, defineComponent, PropType } from "vue";
-import * as dayjs from "dayjs";
+import { formatDate } from "@/modules/entities/utils";
 
 export default defineComponent({
   name: "OrdersHyperlinks",
@@ -58,10 +58,6 @@ export default defineComponent({
         label: "Order ID",
       },
     ];
-
-    const formatDate = (date: Date) => {
-      return dayjs.default(date).format("YYYY-MM-DD");
-    };
 
     return { headers, formatDate };
   },

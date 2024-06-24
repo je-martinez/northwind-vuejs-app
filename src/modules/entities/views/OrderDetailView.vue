@@ -3,7 +3,7 @@
     <!-- Invoice Template -->
     <div class="max-w-4xl mx-auto bg-white p-8 rounded-lg shadow-lg my-10">
       <!-- Header -->
-      <order-header />
+      <order-header v-if="order" :order="order" />
 
       <!-- Invoice Details -->
       <order-detail />

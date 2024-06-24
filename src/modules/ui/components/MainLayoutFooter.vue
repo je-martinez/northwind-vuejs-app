@@ -1,5 +1,5 @@
 <template>
-  <footer class="mb-6 px-6 md:px-0">
+  <footer class="mb-6 px-6">
     <div class="flex justify-center container mx-auto space-x-6">
       <div>
         <h1 class="text-2xl font-bold text-gray-500">northwind</h1>
