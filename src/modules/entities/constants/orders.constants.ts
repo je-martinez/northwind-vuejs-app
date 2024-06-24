@@ -1,0 +1,2 @@
+const ORDER_TAX_PERCENTAGE = 0.1;
+export { ORDER_TAX_PERCENTAGE };

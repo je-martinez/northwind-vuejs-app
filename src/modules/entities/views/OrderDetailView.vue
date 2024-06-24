@@ -6,7 +6,7 @@
       <order-header v-if="order" :order="order" />
 
       <!-- Invoice Details -->
-      <order-detail />
+      <order-detail v-if="order" :order="order" />
 
       <!-- Footer -->
       <order-footer />
