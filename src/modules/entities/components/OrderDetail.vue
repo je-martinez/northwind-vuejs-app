@@ -96,7 +96,6 @@
 </template>
 
 <script lang="ts">
-import { Order } from "@/api/types";
 import { defineComponent, PropType } from "vue";
 import { useIntl } from "vue-intl";
 import { OrderContent } from "../types";

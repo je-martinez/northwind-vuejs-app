@@ -11,13 +11,12 @@
       >
         <tr :class="defaultTrClasses">
           <td :class="defaultTdClasses">
+            <div :class="defaultTdContent">
+              {{ `${employee.firstName} ${employee.lastName}` }}
+            </div>
+          </td>
+          <td :class="defaultTdClasses">
             <div :class="defaultTdContent">{{ employee.title }}</div>
-          </td>
-          <td :class="defaultTdClasses">
-            <div :class="defaultTdContent">{{ employee.firstName }}</div>
-          </td>
-          <td :class="defaultTdClasses">
-            <div :class="defaultTdContent">{{ employee.lastName }}</div>
           </td>
           <td :class="defaultTdClasses">
             <button
@@ -34,7 +33,7 @@
         </tr>
       </template>
     </table-list>
-    <template v-if="selectedEmployee?.orders?.length > 0">
+    <template v-if="(selectedEmployee?.orders ?? [])?.length > 0">
       <order-list-modal
         :show="show"
         :orders="selectedEmployee?.orders"
@@ -65,16 +64,12 @@ export default defineComponent({
     const show = ref(false);
     const headers: TableHeaderDefinition[] = [
       {
+        id: "fullName",
+        label: "Full Name",
+      },
+      {
         id: "title",
         label: "Title",
-      },
-      {
-        id: "firstName",
-        label: "First Name",
-      },
-      {
-        id: "lastName",
-        label: "Last Name",
       },
       {
         id: "orders",

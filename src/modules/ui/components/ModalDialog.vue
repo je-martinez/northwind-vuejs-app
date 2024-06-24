@@ -6,7 +6,7 @@
   >
     <div class="relative w-full max-w-2xl px-4 h-full md:h-auto">
       <!-- Modal content -->
-      <div class="bg-white rounded-lg shadow relative">
+      <div class="animate-fadeIn bg-white rounded-lg shadow relative">
         <!-- Modal header -->
         <div class="flex items-start justify-between p-5 border-b rounded-t">
           <h3 class="text-gray-900 text-xl lg:text-2xl font-semibold">
