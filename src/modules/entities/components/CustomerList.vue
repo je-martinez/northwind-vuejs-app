@@ -34,18 +34,15 @@
     </table-list>
 
     <template v-if="(selectedCustomer?.orders?.length ?? 0) > 0">
-      <order-list-modal
-        :show="show"
-        :orders="selectedCustomer?.orders"
-        @close="show = false"
-      />
+      <order-list-modal :orders="selectedCustomer?.orders" />
+      {{ show }}
     </template>
   </section>
 </template>
 
 <script lang="ts">
 import { TableHeaderDefinition } from "@/modules/ui/types";
-import { defineAsyncComponent, defineComponent, ref } from "vue";
+import { defineAsyncComponent, defineComponent, provide, ref } from "vue";
 import { useNorthwindStore } from "@/modules/entities/composables";
 import { Countries, Customer } from "@/api/types";
 import { CountryCodes } from "@/constants";
@@ -65,6 +62,10 @@ export default defineComponent({
   setup() {
     const selectedCustomer = ref<Customer | null>(null);
     const show = ref(false);
+    const updateShow = (value: boolean) => {
+      show.value = value;
+    };
+    provide("show", { show, updateShow });
     const headers: TableHeaderDefinition[] = [
       {
         id: "country",

@@ -34,17 +34,13 @@
       </template>
     </table-list>
     <template v-if="(selectedEmployee?.orders ?? [])?.length > 0">
-      <order-list-modal
-        :show="show"
-        :orders="selectedEmployee?.orders"
-        @close="show = false"
-      />
+      <order-list-modal :orders="selectedEmployee?.orders" />
     </template>
   </section>
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, defineComponent, ref } from "vue";
+import { defineAsyncComponent, defineComponent, provide, ref } from "vue";
 import { useNorthwindStore } from "@/modules/entities/composables";
 import { TableHeaderDefinition } from "@/modules/ui/types";
 import { Employee } from "@/api/types";
@@ -62,6 +58,10 @@ export default defineComponent({
   setup() {
     const selectedEmployee = ref<Employee | null>(null);
     const show = ref(false);
+    const updateShow = (value: boolean) => {
+      show.value = value;
+    };
+    provide("show", { show, updateShow });
     const headers: TableHeaderDefinition[] = [
       {
         id: "fullName",

@@ -1,5 +1,5 @@
 <template>
-  <modal-dialog :show="show" @close="onClose">
+  <modal-dialog :show="show" @update:show="updateShow?.($event)">
     <template #header>Orders</template>
     <template #body>
       <div class="p-4">
@@ -10,7 +10,7 @@
 </template>
 
 <script lang="ts">
-import { defineAsyncComponent, defineComponent, PropType } from "vue";
+import { defineAsyncComponent, defineComponent, inject, PropType } from "vue";
 import { Order } from "@/api/types";
 
 export default defineComponent({
@@ -19,11 +19,6 @@ export default defineComponent({
     orders: {
       type: Array as PropType<Order[]>,
       required: false,
-    },
-    show: {
-      type: Boolean,
-      required: false,
-      default: true,
     },
   },
   emits: ["close"],
@@ -35,11 +30,13 @@ export default defineComponent({
       () => import("@/modules/ui/components/ModalDialog.vue")
     ),
   },
-  setup(_, { emit }) {
-    const onClose = () => {
-      emit("close");
-    };
-    return { onClose };
+  setup() {
+    const { show, updateShow } =
+      inject<{
+        show: boolean;
+        updateShow: (value: boolean) => void;
+      }>("show") || {};
+    return { show, updateShow };
   },
 });
 </script>
