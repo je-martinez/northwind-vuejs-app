@@ -13,6 +13,7 @@ export interface Employee extends EmployeeRelations {
   notes: string;
   reportsTo: number | string;
   territoryIds: number[];
+  avatar?: string;
 }
 
 export interface EmployeeAddress {

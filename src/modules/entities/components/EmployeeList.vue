@@ -12,6 +12,15 @@
         <tr :class="defaultTrClasses">
           <td :class="defaultTdClasses">
             <div :class="defaultTdContent">
+              <img
+                :src="employee.avatar"
+                alt=""
+                class="rounded-full w-16 h-16 object-cover"
+              />
+            </div>
+          </td>
+          <td :class="defaultTdClasses">
+            <div :class="defaultTdContent">
               {{ `${employee.firstName} ${employee.lastName}` }}
             </div>
           </td>
@@ -63,6 +72,10 @@ export default defineComponent({
     };
     provide("show", { show, updateShow });
     const headers: TableHeaderDefinition[] = [
+      {
+        id: "avatar",
+        label: "Photo",
+      },
       {
         id: "fullName",
         label: "Full Name",
