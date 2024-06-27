@@ -1,3 +1,8 @@
+export interface OrderSummary {
+  header: OrderHeader;
+  content: OrderContent;
+}
+
 export interface OrderHeader {
   orderNumber: string;
   orderDate: string;

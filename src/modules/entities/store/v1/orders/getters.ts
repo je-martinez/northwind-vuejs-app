@@ -2,6 +2,7 @@ import { GetterTree } from "vuex";
 import { OrdersState } from "./state";
 import { StateInterface } from "@/store/v1";
 import { Customer, Employee, Order, Product } from "@/api/types";
+import { orderMapper } from "@/modules/entities/mappers";
 
 const getOrderRelations = (
   order: Order | undefined,
@@ -74,6 +75,21 @@ const getters: GetterTree<OrdersState, StateInterface> = {
         ...getOrderRelations(order, rootGetters),
       };
     },
+
+  getOrderSummary: (_: OrdersState, _getters) => (orderId: number) => {
+    const order = (_getters["allOrders"] as Order[])?.find(
+      (order) => order.id === orderId
+    );
+
+    if (!order) {
+      return;
+    }
+
+    return {
+      header: orderMapper.toOrderHeader(order),
+      content: orderMapper.toOrderContent(order),
+    };
+  },
   loading: (state: OrdersState) => state.loading,
   error: (state: OrdersState) => state.error,
 };

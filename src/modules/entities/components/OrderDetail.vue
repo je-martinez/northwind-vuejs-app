@@ -97,8 +97,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from "vue";
-import { useIntl } from "vue-intl";
 import { OrderContent } from "../types";
+import { useHumanFormats } from "@/modules/ui/composables";
 
 export default defineComponent({
   name: "OrderDetail",
@@ -109,15 +109,7 @@ export default defineComponent({
     },
   },
   setup() {
-    const intl = useIntl();
-    const getFormattedCurrency = (value: number) => {
-      return intl.formatNumber(value, { style: "currency", currency: "USD" });
-    };
-    const getFormattedNumber = (value: number) => {
-      return intl.formatNumber(value, {
-        minimumFractionDigits: 2,
-      });
-    };
+    const { getFormattedNumber, getFormattedCurrency } = useHumanFormats();
     return { getFormattedNumber, getFormattedCurrency };
   },
 });
