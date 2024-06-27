@@ -43,7 +43,7 @@
 <script lang="ts">
 import { TableHeaderDefinition } from "@/modules/ui/types";
 import { defineAsyncComponent, defineComponent, provide, ref } from "vue";
-import { useNorthwindStore } from "@/modules/entities/composables";
+import { useCustomers } from "@/modules/entities/composables";
 import { Countries, Customer } from "@/api/types";
 import { CountryCodes } from "@/constants";
 import CountryFlag from "vue-country-flag-next";
@@ -87,7 +87,7 @@ export default defineComponent({
       selectedCustomer.value = customer;
       show.value = true;
     };
-    const { allCustomers } = useNorthwindStore();
+    const { allCustomers } = useCustomers();
     return {
       selectedCustomer,
       selectCustomer,

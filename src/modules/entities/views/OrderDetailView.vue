@@ -15,7 +15,7 @@
 </template>
 
 <script lang="ts">
-import { useNorthwindStore } from "@/modules/entities/composables";
+import { useOrders } from "@/modules/entities/composables";
 import { computed, defineAsyncComponent, defineComponent } from "vue";
 import { orderMapper } from "@/modules/entities/mappers";
 
@@ -39,7 +39,7 @@ export default defineComponent({
     ),
   },
   setup(props) {
-    const { getOrderById } = useNorthwindStore();
+    const { getOrderById } = useOrders();
 
     const order = getOrderById(props.id);
 

@@ -26,7 +26,7 @@
 import { useGridOrListToggle } from "@/modules/ui/composables";
 import { TableHeaderDefinition } from "@/modules/ui/types";
 import { defineAsyncComponent, defineComponent } from "vue";
-import { useNorthwindStore } from "../composables";
+import { useCategories } from "../composables";
 export default defineComponent({
   name: "CategoryList",
   components: {
@@ -52,7 +52,7 @@ export default defineComponent({
       },
     ];
 
-    const { allCategories } = useNorthwindStore();
+    const { allCategories } = useCategories();
     const { currentView, isList } = useGridOrListToggle();
     return { allCategories, currentView, isList, headers };
   },

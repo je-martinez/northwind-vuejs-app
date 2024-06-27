@@ -50,7 +50,7 @@
 
 <script lang="ts">
 import { defineAsyncComponent, defineComponent, provide, ref } from "vue";
-import { useNorthwindStore } from "@/modules/entities/composables";
+import { useEmployees } from "@/modules/entities/composables";
 import { TableHeaderDefinition } from "@/modules/ui/types";
 import { Employee } from "@/api/types";
 
@@ -89,7 +89,7 @@ export default defineComponent({
         label: "Orders",
       },
     ];
-    const { allEmployees } = useNorthwindStore();
+    const { allEmployees } = useEmployees();
     const selectEmployee = (employee: Employee) => {
       selectedEmployee.value = employee;
       show.value = true;

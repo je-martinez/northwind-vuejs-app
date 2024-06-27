@@ -25,7 +25,7 @@
 <script lang="ts">
 import { TableHeaderDefinition } from "@/modules/ui/types";
 import { defineAsyncComponent, defineComponent } from "vue";
-import { useNorthwindStore } from "@/modules/entities/composables";
+import { useShippers } from "@/modules/entities/composables";
 import { useGridOrListToggle } from "@/modules/ui/composables";
 
 export default defineComponent({
@@ -52,7 +52,7 @@ export default defineComponent({
         label: "Contact Phone",
       },
     ];
-    const { allShippers } = useNorthwindStore();
+    const { allShippers } = useShippers();
     const { currentView, isList } = useGridOrListToggle();
     return { allShippers, currentView, isList, headers };
   },

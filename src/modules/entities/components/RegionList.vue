@@ -52,7 +52,7 @@
 <script lang="ts">
 import { TableHeaderDefinition } from "@/modules/ui/types";
 import { defineAsyncComponent, defineComponent } from "vue";
-import { useNorthwindStore } from "@/modules/entities/composables";
+import { useRegions } from "@/modules/entities/composables";
 import { useGridOrListToggle } from "@/modules/ui/composables";
 export default defineComponent({
   name: "RegionList",
@@ -71,7 +71,7 @@ export default defineComponent({
     ),
   },
   setup() {
-    const { allRegions } = useNorthwindStore();
+    const { allRegions } = useRegions();
     const { currentView, isList } = useGridOrListToggle();
     const headers: TableHeaderDefinition[] = [
       {
