@@ -1,6 +1,7 @@
 <template>
   <section>
     <section-title title="Explore our Products" />
+    <product-list />
   </section>
 </template>
 
@@ -12,6 +13,9 @@ export default defineComponent({
   components: {
     SectionTitle: defineAsyncComponent(
       () => import("@/modules/ui/components/SectionTitle.vue")
+    ),
+    ProductList: defineAsyncComponent(
+      () => import("@/modules/entities/components/ProductList.vue")
     ),
   },
   setup() {
