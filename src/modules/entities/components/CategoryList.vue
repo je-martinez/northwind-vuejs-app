@@ -6,18 +6,32 @@
       @update:currentView="($event) => (currentView = $event)"
     />
     <table-list v-if="isList" :headers="headers" :data="allCategories" />
+
     <div
       v-else
-      class="w-full grid gap-4 pb-8 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
+      class="animate-fadeIn w-full grid gap-4 pb-8 xs:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5"
     >
-      <generic-entity-item
-        :key="category.id"
-        v-for="category in allCategories"
-        :photo="category?.photos?.regular"
-        :title="category?.name"
-        subtitle="Description"
-        :description="category?.description"
-      />
+      <template v-if="!allCategories || (allCategories ?? []).length === 0">
+        <skeleton-generic-entity-item />
+        <skeleton-generic-entity-item />
+        <skeleton-generic-entity-item />
+        <skeleton-generic-entity-item />
+        <skeleton-generic-entity-item />
+        <skeleton-generic-entity-item />
+        <skeleton-generic-entity-item />
+        <skeleton-generic-entity-item />
+      </template>
+
+      <template v-else>
+        <generic-entity-item
+          :key="category.id"
+          v-for="category in allCategories"
+          :photo="category?.photos?.regular"
+          :title="category?.name"
+          subtitle="Description"
+          :description="category?.description"
+        />
+      </template>
     </div>
   </section>
 </template>
@@ -32,6 +46,12 @@ export default defineComponent({
   components: {
     GenericEntityItem: defineAsyncComponent(
       () => import("@/modules/entities/components/GenericEntityItem.vue")
+    ),
+    SkeletonGenericEntityItem: defineAsyncComponent(
+      () =>
+        import(
+          "@/modules/entities/components/skeletons/SkeletonGenericEntityItem.vue"
+        )
     ),
     TableList: defineAsyncComponent(
       () => import("@/modules/ui/components/TableList.vue")

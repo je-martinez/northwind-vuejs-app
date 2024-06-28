@@ -3,7 +3,11 @@
     class="w-full justify-self-center flex-1 mb-8 p-8 order-2 bg-white shadow-xl rounded-3xl sm:w-96 md:w-80 lg:w-full lg:order-1"
   >
     <div class="mb-7 pb-7 flex items-center border-b border-gray-300">
-      <img :src="image" alt="" class="rounded-3xl object-cover w-20 h-20" />
+      <img
+        :src="image"
+        alt=""
+        class="animate-fadeIn rounded-3xl object-cover w-20 h-20"
+      />
       <div class="ml-5">
         <span class="block text-2xl font-semibold">{{ title }}</span>
       </div>

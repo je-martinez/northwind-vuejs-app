@@ -20,15 +20,17 @@
       <div class="w-2/3">
         <slot name="right-section">
           <slot name="title">
-            <h4 class="font-bold mb-3 text-md">{{ title }}</h4>
+            <h4 class="font-bold mb-3 text-md text-ellipsis">{{ title }}</h4>
           </slot>
           <slot name="subtitle">
             <h3 class="text-gray-400 mb-3 text-xs">{{ subtitle }}</h3>
           </slot>
           <slot name="description">
-            <p class="text-sm">
-              {{ description }}
-            </p>
+            <div>
+              <p class="text-sm">
+                {{ description }}
+              </p>
+            </div>
           </slot>
           <slot name="bottom-right-section"></slot>
         </slot>
@@ -55,7 +57,7 @@ export default defineComponent({
     },
     title: {
       type: String,
-      required: true,
+      required: false,
     },
     subtitle: {
       type: String,

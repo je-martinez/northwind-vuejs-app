@@ -1,7 +1,7 @@
 <template>
   <MainLayoutHeader />
   <main-layout-hero-section v-if="showHeroSection" />
-  <main class="container mx-auto px-6">
+  <main class="container mx-auto px-6 min-h-screen">
     <router-view />
   </main>
   <MainLayoutFooter />
