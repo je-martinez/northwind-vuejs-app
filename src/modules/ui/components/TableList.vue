@@ -20,7 +20,32 @@
           </tr>
         </thead>
         <tbody>
-          <template v-for="rowData in currentElements" :key="rowData.id">
+          <template v-if="loading">
+            <slot
+              name="loading"
+              :defaultTrClasses="defaultTrClasses"
+              :defaultTdClasses="defaultTdClasses"
+              :defaultTdContent="defaultTdContent"
+            >
+              <tr
+                v-for="row of loadingRows"
+                :key="`loading-rows-${row}`"
+                :defaultTrClasses="defaultTrClasses"
+              >
+                <td
+                  v-for="header in headers"
+                  :key="header?.toString()"
+                  :class="[header?.cellClasses, defaultTdClasses]"
+                >
+                  <div class="animate-pulse">
+                    <div class="h-6 bg-slate-300 rounded col-span-2"></div>
+                  </div>
+                </td>
+              </tr>
+            </slot>
+          </template>
+
+          <template v-else v-for="rowData in currentElements" :key="rowData.id">
             <slot
               :name="rowName"
               :row="rowData"
@@ -34,9 +59,7 @@
                   :key="header?.toString()"
                   :class="[header?.cellClasses, defaultTdClasses]"
                 >
-                  <div :class="defaultTdContent">
-                    {{ rowData?.[header.id] }}
-                  </div>
+                  {{ rowData?.[header.id] }}
                 </td>
               </tr>
             </slot>
@@ -86,6 +109,16 @@ export default defineComponent({
       type: Array as PropType<TableDataDefinition[]>,
       required: false,
     },
+    loading: {
+      type: Boolean,
+      required: false,
+      default: false,
+    },
+    loadingNumberOfRows: {
+      type: Number,
+      required: false,
+      default: 3,
+    },
     pageSize: {
       type: Number,
       required: false,
@@ -130,6 +163,11 @@ export default defineComponent({
       return currentPage.value * (currentElements.value?.length ?? 1);
     });
 
+    const loadingRows = Array.from(
+      { length: props.loadingNumberOfRows },
+      (_, i) => i
+    );
+
     return {
       headerName,
       rowName,
@@ -143,6 +181,7 @@ export default defineComponent({
       showingEntries,
       nextPage,
       prevPage,
+      loadingRows,
     };
   },
 });

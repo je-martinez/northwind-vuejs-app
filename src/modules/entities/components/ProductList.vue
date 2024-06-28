@@ -1,5 +1,10 @@
 <template>
-  <table-list :headers="headers" :data="allProducts">
+  <table-list
+    :loading="!allProducts || allProducts?.length === 0"
+    :loading-number-of-rows="15"
+    :headers="headers"
+    :data="allProducts"
+  >
     <template
       #tbl-row="{
         row: product,
@@ -8,7 +13,7 @@
         defaultTdContent,
       }"
     >
-      <tr :class="defaultTrClasses">
+      <tr class="animate-fadeIn" :class="defaultTrClasses">
         <td :class="defaultTdClasses">
           <div :class="defaultTdContent">
             <img

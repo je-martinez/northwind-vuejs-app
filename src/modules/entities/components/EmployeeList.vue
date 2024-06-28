@@ -1,6 +1,11 @@
 <template>
   <section>
-    <table-list :headers="headers" :data="allEmployees">
+    <table-list
+      :loading="!allEmployees || allEmployees?.length === 0"
+      :loading-number-of-rows="15"
+      :headers="headers"
+      :data="allEmployees"
+    >
       <template
         #tbl-row="{
           row: employee,
@@ -9,7 +14,7 @@
           defaultTdContent,
         }"
       >
-        <tr :class="defaultTrClasses">
+        <tr class="animate-fadeIn" :class="defaultTrClasses">
           <td :class="defaultTdClasses">
             <div :class="defaultTdContent">
               <img

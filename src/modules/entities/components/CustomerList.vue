@@ -1,7 +1,12 @@
 /
 <template>
   <section>
-    <table-list :headers="headers" :data="allCustomers">
+    <table-list
+      :loading="!allCustomers || allCustomers?.length === 0"
+      :loading-number-of-rows="15"
+      :headers="headers"
+      :data="allCustomers"
+    >
       <template
         #tbl-row="{
           row: customer,
@@ -10,7 +15,7 @@
           defaultTdContent,
         }"
       >
-        <tr :class="defaultTrClasses">
+        <tr class="animate-fadeIn" :class="defaultTrClasses">
           <td :class="defaultTdClasses">
             <country-flag :country="getFlag(customer?.address?.country)" />
           </td>

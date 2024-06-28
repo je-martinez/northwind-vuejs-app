@@ -1,5 +1,10 @@
 <template>
-  <table-list :headers="headers" :data="allOrders">
+  <table-list
+    :loading="!allOrders || allOrders?.length === 0"
+    :loading-number-of-rows="15"
+    :headers="headers"
+    :data="allOrders"
+  >
     <template
       #tbl-row="{
         row: order,
@@ -8,7 +13,7 @@
         defaultTdContent,
       }"
     >
-      <tr :class="defaultTrClasses">
+      <tr class="animate-fadeIn" :class="defaultTrClasses">
         <td :class="defaultTdClasses">
           <router-link :to="{ name: 'order', params: { id: order.id } }">
             <span class="text-blue-500 underline text-md"

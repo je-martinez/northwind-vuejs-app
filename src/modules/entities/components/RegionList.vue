@@ -13,7 +13,7 @@
         defaultTdContent,
       }"
     >
-      <tr :class="defaultTrClasses">
+      <tr class="animate-fadeIn" :class="defaultTrClasses">
         <td :class="defaultTdClasses">
           <div :class="defaultTdContent">{{ region.name }}</div>
         </td>
