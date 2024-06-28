@@ -8,6 +8,9 @@ export default {
     {
       path: "categories",
       name: "categories",
+      meta: {
+        title: "Categories",
+      },
       component: () =>
         import(
           /* webpackChunkName: "categories" */ "@/modules/entities/views/CategoriesView.vue"
@@ -16,6 +19,9 @@ export default {
     {
       path: "customers",
       name: "customers",
+      meta: {
+        title: "Customers",
+      },
       component: () =>
         import(
           /* webpackChunkName: "customers" */ "@/modules/entities/views/CustomersView.vue"
@@ -24,6 +30,9 @@ export default {
     {
       path: "employees",
       name: "employees",
+      meta: {
+        title: "Employees",
+      },
       component: () =>
         import(
           /* webpackChunkName: "employees" */ "@/modules/entities/views/EmployeesView.vue"
@@ -32,6 +41,9 @@ export default {
     {
       path: "orders",
       name: "orders",
+      meta: {
+        title: "Orders",
+      },
       component: () =>
         import(
           /* webpackChunkName: "orders" */ "@/modules/entities/views/OrdersView.vue"
@@ -40,6 +52,9 @@ export default {
     {
       path: "order/:id",
       name: "order",
+      meta: {
+        title: "Order Detail",
+      },
       component: () =>
         import(
           /* webpackChunkName: "order-detail" */ "@/modules/entities/views/OrderDetailView.vue"
@@ -51,6 +66,9 @@ export default {
     {
       path: "products",
       name: "products",
+      meta: {
+        title: "Products",
+      },
       component: () =>
         import(
           /* webpackChunkName: "products" */ "@/modules/entities/views/ProductsView.vue"
@@ -59,6 +77,9 @@ export default {
     {
       path: "regions",
       name: "regions",
+      meta: {
+        title: "Regions",
+      },
       component: () =>
         import(
           /* webpackChunkName: "regions" */ "@/modules/entities/views/RegionsView.vue"
@@ -67,6 +88,9 @@ export default {
     {
       path: "shippers",
       name: "shippers",
+      meta: {
+        title: "Shippers",
+      },
       component: () =>
         import(
           /* webpackChunkName: "shippers" */ "@/modules/entities/views/ShippersView.vue"
@@ -75,6 +99,9 @@ export default {
     {
       path: "suppliers",
       name: "suppliers",
+      meta: {
+        title: "Suppliers",
+      },
       component: () =>
         import(
           /* webpackChunkName: "suppliers" */ "@/modules/entities/views/SuppliersView.vue"

@@ -26,4 +26,11 @@ const router = createRouter({
   routes,
 });
 
+router.beforeEach((to) => {
+  const { title } = to.meta;
+  const prefix = "Northwind | ";
+  const metaTitle = `${prefix} ${title ?? "App"}`;
+  document.title = metaTitle;
+});
+
 export default router;

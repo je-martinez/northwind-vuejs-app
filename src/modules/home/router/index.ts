@@ -8,6 +8,9 @@ export default {
     {
       path: "",
       name: "home",
+      meta: {
+        title: "Home",
+      },
       component: () =>
         import(
           /* webpackChunkName: "home" */ "@/modules/home/views/EntityListView.vue"
