@@ -7,12 +7,12 @@
             <th
               v-for="header in headers"
               :key="header.id"
-              :class="defaultThClasses"
+              :class="allClasses.th"
             >
               <slot
                 :name="headerName"
                 :header="header"
-                :defaultThClasses="defaultThClasses"
+                :defaultThClasses="allClasses.th"
               >
                 {{ header.label }}
               </slot>
@@ -23,21 +23,21 @@
           <template v-if="loading">
             <slot
               name="loading"
-              :defaultTrClasses="defaultTrClasses"
-              :defaultTdClasses="defaultTdClasses"
-              :defaultTdContent="defaultTdContent"
+              :defaultTrClasses="allClasses.tr"
+              :defaultTdClasses="allClasses.td"
+              :defaultTdContent="allClasses.tdContent"
             >
               <tr
                 v-for="row of loadingRows"
                 :key="`loading-rows-${row}`"
-                :defaultTrClasses="defaultTrClasses"
+                :defaultTrClasses="allClasses.tr"
               >
                 <td
                   v-for="header in headers"
                   :key="header?.toString()"
-                  :class="[header?.cellClasses, defaultTdClasses]"
+                  :class="[header?.cellClasses, allClasses.td]"
                 >
-                  <div class="animate-pulse">
+                  <div :class="allClasses.tdContent" class="animate-pulse">
                     <div class="h-6 bg-slate-300 rounded col-span-2"></div>
                   </div>
                 </td>
@@ -49,15 +49,15 @@
             <slot
               :name="rowName"
               :row="rowData"
-              :defaultTrClasses="defaultTrClasses"
-              :defaultTdClasses="defaultTdClasses"
-              :defaultTdContent="defaultTdContent"
+              :defaultTrClasses="allClasses.tr"
+              :defaultTdClasses="allClasses.td"
+              :defaultTdContent="allClasses.tdContent"
             >
-              <tr :class="defaultTrClasses">
+              <tr :class="allClasses.tr">
                 <td
                   v-for="header in headers"
                   :key="header?.toString()"
-                  :class="[header?.cellClasses, defaultTdClasses]"
+                  :class="[header?.cellClasses, allClasses.td]"
                 >
                   {{ rowData?.[header.id] }}
                 </td>
@@ -119,6 +119,26 @@ export default defineComponent({
       required: false,
       default: 3,
     },
+    classesTh: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    classesTd: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    classesTr: {
+      type: String,
+      required: false,
+      default: "",
+    },
+    classesTdContent: {
+      type: String,
+      required: false,
+      default: "",
+    },
     pageSize: {
       type: Number,
       required: false,
@@ -129,13 +149,6 @@ export default defineComponent({
   setup(props) {
     const headerName = TableListConstants.HeaderSlotName;
     const rowName = TableListConstants.TableSlotName;
-    const defaultTrClasses = "h-26";
-    const defaultTdClasses =
-      "px-5 py-5 border-b border-gray-200 bg-white text-sm";
-    const defaultTdContent = "text-gray-900 whitespace-no-wrap";
-    const defaultThClasses =
-      "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider";
-
     const currentPage = ref(1);
     const currentPageSize = ref(props.pageSize);
     const currentElements = computed(() => {
@@ -168,13 +181,26 @@ export default defineComponent({
       (_, i) => i
     );
 
+    const defaultTrClasses = "h-26";
+    const defaultTdClasses =
+      "px-5 py-5 border-b border-gray-200 bg-white text-sm";
+    const defaultTdContent = "text-gray-900 whitespace-no-wrap";
+    const defaultThClasses =
+      "px-5 py-3 border-b-2 border-gray-200 bg-gray-100 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider";
+
+    const allClasses = computed(() => {
+      return {
+        tr: [defaultTrClasses, props.classesTr].join(" "),
+        td: [defaultTdClasses, props.classesTd].join(" "),
+        tdContent: [defaultTdContent, props.classesTdContent].join(" "),
+        th: [defaultThClasses, props.classesTh].join(" "),
+      };
+    });
+
     return {
       headerName,
       rowName,
-      defaultTrClasses,
-      defaultTdClasses,
-      defaultTdContent,
-      defaultThClasses,
+      allClasses,
       currentElements,
       currentPage,
       currentPageSize,

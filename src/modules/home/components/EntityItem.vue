@@ -14,7 +14,8 @@
     </div>
     <ul class="mb-7 font-medium text-gray-500 min-h-24 h-24">
       <li class="flex text-lg mb-2">
-        <img src="https://res.cloudinary.com/williamsondesign/check-grey.svg" />
+        <CheckIcon class="size-12" />
+        <!-- <img src="https://res.cloudinary.com/williamsondesign/check-grey.svg" /> -->
         <span class="ml-3">{{ description }}</span>
       </li>
     </ul>
@@ -23,10 +24,7 @@
         class="flex justify-center items-center bg-gray-800 rounded-xl py-5 px-4 text-center text-white text-xl"
       >
         Explore
-        <img
-          src="https://res.cloudinary.com/williamsondesign/arrow-right.svg"
-          class="ml-2"
-        />
+        <ArrowRightIcon class="ml-2 size-6" />
       </a>
     </router-link>
   </div>
@@ -35,9 +33,14 @@
 <script lang="ts">
 import { defineComponent } from "vue";
 import { useRouter } from "vue-router";
+import { ArrowRightIcon, CheckIcon } from "@heroicons/vue/24/solid";
 
 export default defineComponent({
   name: "EntityItem",
+  components: {
+    ArrowRightIcon,
+    CheckIcon,
+  },
   props: {
     id: {
       type: String,
