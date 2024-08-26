@@ -1,28 +1,27 @@
 <template>
   <MainLayoutHeader />
-  <main-layout-hero-section v-if="showHeroSection" />
+  <!-- <main-layout-hero-section v-if="showHeroSection" />
   <main class="container mx-auto px-6 min-h-screen">
     <router-view />
   </main>
-  <MainLayoutFooter />
+  <MainLayoutFooter /> -->
 </template>
 
 <script lang="ts">
-import { computed, defineAsyncComponent, defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import { useRouter } from "vue-router";
+import MainLayoutHeader from "../components/MainLayoutHeader.vue";
 
 export default defineComponent({
   name: "HomeLayout",
   components: {
-    MainLayoutHeader: defineAsyncComponent(
-      () => import("../components/MainLayoutHeader.vue")
-    ),
-    MainLayoutHeroSection: defineAsyncComponent(
-      () => import("../components/MainLayoutHeroSection.vue")
-    ),
-    MainLayoutFooter: defineAsyncComponent(
-      () => import("../components/MainLayoutFooter.vue")
-    ),
+    MainLayoutHeader,
+    // MainLayoutHeroSection: defineAsyncComponent(
+    //   () => import("../components/MainLayoutHeroSection.vue")
+    // ),
+    // MainLayoutFooter: defineAsyncComponent(
+    //   () => import("../components/MainLayoutFooter.vue")
+    // ),
   },
   setup() {
     const { currentRoute } = useRouter();

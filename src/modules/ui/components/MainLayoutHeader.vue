@@ -1,9 +1,9 @@
 <template>
   <header>
-    <nav class="bg-white p-6">
+    <nav class="bg-white p-6 h-20">
       <div class="flex justify-between items-center">
         <router-link :to="{ name: 'home' }">
-          <h1 class="pr-6 border-r-2 text-2xl font-bold text-gray-500">
+          <h1 class="h-8 pr-6 border-r-2 text-2xl font-bold text-gray-500">
             northwind
           </h1>
         </router-link>
@@ -43,6 +43,7 @@ import { defineComponent } from "vue";
 export default defineComponent({
   name: "HomeHeader",
   setup() {
+    console.log({ hola: "hola" });
     return {};
   },
 });
